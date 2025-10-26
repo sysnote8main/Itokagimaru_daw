@@ -212,10 +212,9 @@ public class Daw_menu_listener implements Listener {
 
                     ItemStack page_item = Objects.requireNonNull(clicked_inv).getItem(2);
                     if (clicked_inv == pl_inv) {
-                        NamespacedKey page_key = new NamespacedKey("itokagimaru_daw", "page");
                         int tag_int = openMenu.daw_input_getPage(Objects.requireNonNull(page_item));
                         if (tag_int > 31) return;
-                        page_item.setItemMeta(makeItem.make_itemmeta(page_item,"現在" + String.valueOf(tag_int + 1) + "ページ目",null,null,page_key,String.valueOf(tag_int + 1)));
+                        page_item.setItemMeta(makeItem.make_itemmeta(page_item,"現在" + String.valueOf(tag_int + 1) + "ページ目",null,null,getKey.page_key(),String.valueOf(tag_int + 1)));
                         ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
                         int topnote = openMenu.daw_get_topnote(topnote_item);
                         openMenu.daw_input_gui_update(player, event.getInventory(), event.getView().title(), topnote, tag_int + 1);
@@ -233,10 +232,9 @@ public class Daw_menu_listener implements Listener {
 
                     ItemStack page_item = clicked_inv.getItem(2);
                     if (clicked_inv == pl_inv) {
-                        NamespacedKey page_key = new NamespacedKey("itokagimaru_daw", "page");
                         int tag_int = openMenu.daw_input_getPage(page_item);
                         if (tag_int < 2) return;
-                        page_item.setItemMeta(makeItem.make_itemmeta(page_item,"現在" + String.valueOf(tag_int - 1) + "ページ目",null, null, page_key, String.valueOf(tag_int - 1)));
+                        page_item.setItemMeta(makeItem.make_itemmeta(page_item,"現在" + String.valueOf(tag_int - 1) + "ページ目",null, null, getKey.page_key(), String.valueOf(tag_int - 1)));
 
                         ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
                         int topnote = openMenu.daw_get_topnote(topnote_item);
@@ -305,8 +303,8 @@ public class Daw_menu_listener implements Listener {
 
             ItemMeta meta = clicked.getItemMeta();
             Inventory clicked_inv = event.getClickedInventory();
-            if (clicked.getType() == Material.LIME_STAINED_GLASS_PANE && meta.getPersistentDataContainer().get(new NamespacedKey("itokagimaru_daw", "itemtag"), PersistentDataType.STRING) != null) {
-                int tag_int =Integer.parseInt(meta.getPersistentDataContainer().get(new NamespacedKey("itokagimaru_daw", "itemtag"), PersistentDataType.STRING));
+            if (clicked.getType() == Material.LIME_STAINED_GLASS_PANE && meta.getPersistentDataContainer().get(getKey.itemTag_key(), PersistentDataType.STRING) != null) {
+                int tag_int =Integer.parseInt(meta.getPersistentDataContainer().get(getKey.itemTag_key(), PersistentDataType.STRING));
                 openMenu.daw_play_mode(player, tag_int);
             }else if (clicked.getType() == Material.PAPER && Objects.equals(meta.getItemModel(), NamespacedKey.minecraft("next_b_right"))) {
                 int bpm =Integer.parseInt(Objects.requireNonNull(player.getOpenInventory().getTopInventory().getItem(1)).getPersistentDataContainer().get(getKey.itemTag_key(), PersistentDataType.STRING));

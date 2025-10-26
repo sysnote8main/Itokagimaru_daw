@@ -158,8 +158,6 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
         public void daw_menu(Player player) {
             Inventory menu = Bukkit.createInventory(null,9, Component.text("§bだう"));
 
-
-
             ItemStack writable = new ItemStack(Material.WRITABLE_BOOK);
             writable.setItemMeta(makeitem.make_itemmeta(writable,"§e打ち込みモード",null,null,null,null));
             menu.setItem(3, writable);
