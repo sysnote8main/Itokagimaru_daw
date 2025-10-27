@@ -1,23 +1,9 @@
 package io.github.itokagimaru.itokagimaru_daw;
 
-
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.Material;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import org.bukkit.configuration.file.YamlConfiguration;
-import java.io.File;
-import java.io.IOException;
 
 import org.bukkit.event.Listener;
 
@@ -26,8 +12,6 @@ import java.util.*;
 import io.github.itokagimaru.itokagimaru_daw.listeners.Daw_menu_listener;
 import io.github.itokagimaru.itokagimaru_daw.listeners.Daw_Item_use_listener;
 import io.github.itokagimaru.itokagimaru_daw.listeners.Daw_close_inventory_listeners;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 
 public final class Itokagimaru_daw extends JavaPlugin implements Listener {
@@ -63,6 +47,4 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
     }
 
     public static Itokagimaru_daw getInstance() {return instance;}
-
-
 }
