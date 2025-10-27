@@ -15,6 +15,7 @@ public class NameKeyManager {
     public static NamespacedKey ITEMTAG = new NamespacedKey(NAME_KEY, "itemtag");
     public static NamespacedKey TEMPO = new NamespacedKey(NAME_KEY, "tempo");
     public static NamespacedKey TOPNOTE = new NamespacedKey(NAME_KEY, "topnote");
+    public static NamespacedKey BYTELIST = new NamespacedKey(NAME_KEY, "bytelist");
     public static class getPDC {
         public int bpm(ItemStack item) {
             ItemMeta meta = item.getItemMeta();
@@ -32,6 +33,15 @@ public class NameKeyManager {
             ItemMeta meta = item.getItemMeta();
             String pdc = meta.getPersistentDataContainer().get(PAGE, PersistentDataType.STRING);
             return Integer.parseInt(Objects.requireNonNull(pdc));
+        }public byte[] bytelist(ItemStack item) {
+            if (!item.hasItemMeta()) {
+                ByteArrayManager byteArrayManager = new ByteArrayManager();
+                byte[] data =byteArrayManager.encode(new int[] {1,2,3});
+                return data;
+            }
+            ItemMeta meta = item.getItemMeta();
+            byte[] pdc = meta.getPersistentDataContainer().get(BYTELIST, PersistentDataType.BYTE_ARRAY);
+            return pdc;
         }
 
     }
