@@ -1,5 +1,6 @@
 package io.github.itokagimaru.itokagimaru_daw.listeners;
 
+import io.github.itokagimaru.itokagimaru_daw.GuiMenuManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,8 +28,8 @@ public class Daw_Item_use_listener implements Listener {
         if (item.getItemMeta().hasItemModel()) {
             NamespacedKey data = item.getItemMeta().getItemModel();
             if (item.getType() == Material.WOODEN_SWORD && Objects.equals(data, NamespacedKey.minecraft("itokagimaru_daw")) && item.getItemMeta().getDisplayName().equals("§x§9§5§E§5§F§9daw")) {
-                Itokagimaru_daw.open_menu DAW_menu = new Itokagimaru_daw.open_menu();
-                DAW_menu.daw_menu(p);
+                GuiMenuManager DAW_menu = new GuiMenuManager();
+                DAW_menu.openMenu(p);
             }
         }
     }
