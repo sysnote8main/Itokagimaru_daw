@@ -1,5 +1,6 @@
 package io.github.itokagimaru.itokagimaru_daw.listeners;
 
+import io.github.itokagimaru.itokagimaru_daw.PlayMusic;
 import net.kyori.adventure.text.Component;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,6 +9,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.entity.Player;
 
 import io.github.itokagimaru.itokagimaru_daw.Itokagimaru_daw;
+import io.github.itokagimaru.itokagimaru_daw.MusicManager;
+import io.github.itokagimaru.itokagimaru_daw.InventoryManager;
 
 public class Daw_close_inventory_listeners implements Listener {
     @EventHandler
@@ -15,9 +18,9 @@ public class Daw_close_inventory_listeners implements Listener {
         Player p = (Player) e.getPlayer();
         Inventory inv = e.getInventory();
         if (e.getView().title().equals(Component.text("§b打ち込みモード"))) {//打ち込みモードを閉じたことを検知
-            Itokagimaru_daw.music music = new Itokagimaru_daw.music();
-            Itokagimaru_daw.inventory_save inventory_lode = new Itokagimaru_daw.inventory_save();
-            int[] loded_music = music.load_Music(p);
+            MusicManager music = new MusicManager();
+            InventoryManager inventory_lode = new InventoryManager();
+            int[] loded_music = music.loadMusic(p);
             for (int i = 0;i < loded_music.length;i++) {//エンドポイントの削除
                 if  (loded_music[i] == -1) loded_music[i] = 0;
             }
@@ -33,7 +36,7 @@ public class Daw_close_inventory_listeners implements Listener {
             inventory_lode.loadInventory(p);
         }else if (e.getView().title().equals(Component.text("§b再生モード"))){
             Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
-            Itokagimaru_daw.play play = playing.get_playing(p);
+            PlayMusic play = playing.get_playing(p);
             if (play == null) return;
             play.stop_task();
         }
