@@ -21,15 +21,18 @@ public class SheetMusicManager {
         meta.displayName(Component.text("記述済みの楽譜"));
         meta.lore(List.of(Component.text("written by:" + player.getName())));
         meta.setItemModel(NamespacedKey.minecraft("written_sheet_music"));
+        PlaySound playSound = new PlaySound();
+        playSound.playPageTurn(player);
         meta.getPersistentDataContainer().set(NameKeyManager.BYTELIST, PersistentDataType.BYTE_ARRAY, data);
         return  meta;
     }
     public void lodeSheetMusic(Player player,ItemStack item){
-
         ByteArrayManager byteArrayManager = new ByteArrayManager();
         NameKeyManager.getPDC getPdc = new NameKeyManager.getPDC();
         int[] music = byteArrayManager.decode(getPdc.bytelist(item));
         MusicManager musicManager = new MusicManager();
         musicManager.saveMusic(player,music);
+        PlaySound playSound = new PlaySound();
+        playSound.playLavelup(player);
     }
 }

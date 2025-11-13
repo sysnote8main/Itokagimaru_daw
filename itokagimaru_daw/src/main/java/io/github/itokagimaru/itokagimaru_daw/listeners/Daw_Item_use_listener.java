@@ -1,6 +1,7 @@
 package io.github.itokagimaru.itokagimaru_daw.listeners;
 
 import io.github.itokagimaru.itokagimaru_daw.GuiMenuManager;
+import io.github.itokagimaru.itokagimaru_daw.ParticleManager;
 import io.github.itokagimaru.itokagimaru_daw.SheetMusicManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
@@ -32,10 +33,11 @@ public class Daw_Item_use_listener implements Listener {
             if (item.getType() == Material.WOODEN_HOE && Objects.equals(data, NamespacedKey.minecraft("blank_sheet_music"))) {
                 SheetMusicManager sheetMusicManage = new SheetMusicManager();
                 item.setItemMeta(sheetMusicManage.makeSheetMusic(p));
+
             }if (item.getType() == Material.WOODEN_HOE && Objects.equals(data, NamespacedKey.minecraft("written_sheet_music"))) {
                 SheetMusicManager sheetMusicManage = new SheetMusicManager();
                 sheetMusicManage.lodeSheetMusic(p,item);
-                p.sendMessage("tes");
+
             }
         }
     }

@@ -1,5 +1,6 @@
 package io.github.itokagimaru.itokagimaru_daw;
 
+import io.github.itokagimaru.itokagimaru_daw.listeners.PlayerJpinListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -37,6 +38,7 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Daw_menu_listener(),this);
         getServer().getPluginManager().registerEvents(new Daw_Item_use_listener(),this);
         getServer().getPluginManager().registerEvents(new Daw_close_inventory_listeners(),this);
+        //getServer().getPluginManager().registerEvents(new PlayerJpinListener(),this);
         instance = this;
     }
 
