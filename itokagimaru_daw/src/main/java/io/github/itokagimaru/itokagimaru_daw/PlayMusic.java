@@ -18,8 +18,8 @@ public class PlayMusic {
         task = new BukkitRunnable() {
             final int[] loded_music = music.loadMusic(player);
             int count = 0;
-            float pitch = 0;
             MakeItem makeitem = new MakeItem();
+            PlaySound playSound = new PlaySound();
             @Override
             public void run() {
                 if (loded_music[count] == -1 || count >= loded_music.length) {
@@ -28,8 +28,9 @@ public class PlayMusic {
                     player.getOpenInventory().getTopInventory().setItem(4,play);
                     cancel();
                 }else if(loded_music[count] != 0){
-                    pitch = (float) Math.pow(2.0 , (double) (14 - loded_music[count]) / 12);
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1.9f,pitch);
+                    playSound.playNote(player,loded_music[count]);
+                    ParticleManager particlemanager = new ParticleManager();
+                    particlemanager.playNote(player);
                 }
                 count++;
             }

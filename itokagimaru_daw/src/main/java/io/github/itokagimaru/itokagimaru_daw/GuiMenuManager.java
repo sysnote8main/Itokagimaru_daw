@@ -94,7 +94,7 @@ public class GuiMenuManager {
     public void inputGuiUpdate(Player player , Inventory inv , Component invName, Integer topNote, Integer page) {
         MusicManager music = new MusicManager();
         int[] musicList = music.loadMusic(player);
-        int noteInt;
+        int noteId;
 
         if (invName == null || topNote == null || musicList == null) {
             return;
@@ -107,14 +107,14 @@ public class GuiMenuManager {
                 inv.setItem(i, paper);
             }
             for (int i = 0 ; i <= 5 ; i++) {
-                noteInt = topNote + i;
-                if (noteInt >= 7)noteInt -= 6;
-                paper.setItemMeta(makeItem.makeItemMeta(paper,String.valueOf(topNote) + "/" + String.valueOf(noteInt),null,"key_board_" + String.valueOf(noteInt),NameKeyManager.TOPNOTE,String.valueOf(topNote)));
+                noteId = topNote + i;
+                paper.setAmount((int) (7 - (noteId + 2)/6));
+                while (noteId>=7)noteId -= 6;
+                paper.setItemMeta(makeItem.makeItemMeta(paper,String.valueOf(topNote) + "/" + String.valueOf(noteId),null,"key_board_" + String.valueOf(noteId),NameKeyManager.TOPNOTE,String.valueOf(topNote)));
                 inv.setItem(i * 9, paper);
             }
-
+            paper.setAmount(1);
             for(int i = 0 ; i < 8 ; i++){
-
                 int note = musicList[i+((page -1)*8)];
                 if (note != 0){
                     if (note % 2 == 1){

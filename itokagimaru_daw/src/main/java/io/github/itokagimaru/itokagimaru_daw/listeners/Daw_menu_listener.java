@@ -71,37 +71,36 @@ public class Daw_menu_listener implements Listener {
                     }
                 }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("ド/C"))) {
-                    if (topnote == 0)add =0;
-                    else if (1 <= topnote && topnote <= 6)add =1;
-                    else if (topnote >= 7)add =2;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 2 + (12*add);
+                    add = Math.min((topnote + 2) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 8 + (12*add);
                 }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("レ/D"))){
-                    if (0 <= topnote && topnote <= 5)add =0;
-                    else if (topnote >= 6)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 12 + (12*add);
+                    add = Math.min((topnote + 3) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 6 + (12*add);
                 }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("ミ/E"))){
-                    if (0 <= topnote && topnote <= 4)add =0;
-                    else if (topnote >= 5)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 10 + (12*add);
+                    add = Math.min((topnote + 4) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 4 + (12*add);
                 }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("ファ/F"))){
-                    if (0 <= topnote && topnote <= 4)add =0;
-                    else if (topnote >= 5)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 9 + (12*add);}
+                    add = Math.min((topnote + 4) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 3 + (12*add);
+
+                }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("ソ/G"))){
-                    if (0 <= topnote && topnote <= 3)add =0;
-                    else if (topnote >= 4)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 7 + (12*add);}
+                    if (topnote != 0){
+                        add = Math.min((topnote - 1) / 6, 5);
+                        lodedmusic[(page - 1) * 8 + select - 1] = 13 + add * 12;
+                    }
+                }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("ラ/A"))){
-                    if (0 <= topnote && topnote <= 2)add =0;
-                    else if (topnote >= 3)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 5 + (12*add);}
+                    add = Math.min((topnote) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 11 + (12*add);
+                }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("シ/B"))){
-                    if (0 <= topnote && topnote <= 1)add =0;
-                    else if (topnote >= 2)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 3 + (12*add);}
+                    add = Math.min((topnote + 1) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 9 + (12*add);
+                }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("休符")))
                     lodedmusic[(page - 1) * 8 + select - 1] = 0;
                 //"ド/C","レ/D","ミ/E","ファ/F","ソ/G","ラ/A","シ/B"
@@ -136,32 +135,29 @@ public class Daw_menu_listener implements Listener {
                     }
                 }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("ド#/C#"))){
-                    if (topnote != 0){
-                        if (1 <= topnote && topnote <= 6)add =0;
-                        else if (topnote >= 7)add =1;
-                        lodedmusic[(page - 1) * 8 + select - 1] = 13 + add * 12;
-                    }
+                    add = Math.min((topnote + 2) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 7 + (12*add);
                 }
 
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("レ#/D#"))){
-                    if (0 <= topnote && topnote <= 5)add =0;
-                    else if (topnote >= 6)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 11 + (12*add);
+                    add = Math.min((topnote + 3) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 5 + (12*add);
                 }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("ファ#/F#"))){
-                    if (0 <= topnote && topnote <= 3)add =0;
-                    else if (topnote >= 4)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 8 + (12*add);
+                    add = Math.min((topnote + 5) / 6, 6);
+                    if (topnote == 0) add = 0;
+
+                    lodedmusic[(page - 1) * 8 + select - 1] = 2 + (12*add);
                 }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("ソ#/G#"))){
-                    if (0 <= topnote && topnote <= 2)add =0;
-                    else if (topnote >= 3)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 6 + (12*add);
+                    add = Math.min((topnote) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 12 + (12*add);
+
                 }
                 if (Objects.requireNonNull(meta.displayName()).equals(Component.text("ラ#/A#"))){
-                    if (0 <= topnote && topnote <= 1)add =0;
-                    else if (topnote >= 2)add =1;
-                    lodedmusic[(page - 1) * 8 + select - 1] = 4 + (12*add);}
+                    add = Math.min((topnote + 1) / 6, 5);
+                    lodedmusic[(page - 1) * 8 + select - 1] = 10 + (12*add);
+                }
                 musicManager.saveMusic(player, lodedmusic.clone());
                 menuManager.inputGuiUpdate(player, event.getInventory(), event.getView().title(), topnote, page);
                 ItemStack update_select = new ItemStack(Material.PAPER);
@@ -191,7 +187,7 @@ public class Daw_menu_listener implements Listener {
 
                     ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
                     int topnote = getPdc.topnote(topnote_item);
-                    if (topnote >=7) topnote -= 1;
+                    if (topnote >=31) topnote -= 1;
                     menuManager.inputGuiUpdate(player, event.getInventory(), event.getView().title(), topnote+1, tag_int);
 
                 } else if (Objects.requireNonNull(meta.displayName()).equals(Component.text("カーソルを移動")) && Objects.equals(meta.getItemModel(), NamespacedKey.minecraft("next_b_up"))) {

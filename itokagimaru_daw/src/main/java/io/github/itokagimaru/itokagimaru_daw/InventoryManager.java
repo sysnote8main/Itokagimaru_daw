@@ -15,7 +15,6 @@ public class InventoryManager {
         if(!inv.containsKey(player.getUniqueId())){
             return;
         }
-        player.sendMessage("tes");
         player.getInventory().setContents(inv.get(player.getUniqueId()).clone());
     }
 }
