@@ -29,6 +29,7 @@ public class PlayMusic {
                     cancel();
                 }else if(loded_music[count] != 0){
                     playSound.playNote(player,loded_music[count]);
+
                     ParticleManager particlemanager = new ParticleManager();
                     particlemanager.playNote(player);
                 }

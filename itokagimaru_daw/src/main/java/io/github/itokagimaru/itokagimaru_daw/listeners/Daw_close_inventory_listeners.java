@@ -31,7 +31,7 @@ public class Daw_close_inventory_listeners implements Listener {
                     break;
                 }
             }
-            loded_music[music_end_point] = -1;
+            if(!(music_end_point>= loded_music.length)) loded_music[music_end_point] = -1;
             music.saveMusic(p, loded_music);
             inventory_lode.loadInventory(p);
         }else if (e.getView().title().equals(Component.text("§b再生モード"))){
