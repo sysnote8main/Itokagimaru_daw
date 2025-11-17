@@ -15,7 +15,7 @@ public class MusicManager {
     }
     public int[] loadMusic(Player player){
         if(!savedMusicList.containsKey(player.getUniqueId())){
-            int[] music = new int[256];
+            int[] music = new int[Itokagimaru_daw.MUSICLENGTH];
             Arrays.fill(music, 0);
             saveMusic(player,music);
             return music;

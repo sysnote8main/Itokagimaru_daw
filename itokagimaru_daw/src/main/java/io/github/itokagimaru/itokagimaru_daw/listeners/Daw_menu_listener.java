@@ -210,7 +210,7 @@ public class Daw_menu_listener implements Listener {
                     ItemStack page_item = Objects.requireNonNull(clicked_inv).getItem(2);
                     if (clicked_inv == pl_inv) {
                         int tag_int = getPdc.page(Objects.requireNonNull(page_item));
-                        if (tag_int > 31) return;
+                        if (tag_int > Itokagimaru_daw.MAXPAGE) return;
                         page_item.setItemMeta(makeItem.makeItemMeta(page_item,"現在" + String.valueOf(tag_int + 1) + "ページ目",null,null,NameKeyManager.PAGE,String.valueOf(tag_int + 1)));
                         ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
                         int topnote = getPdc.topnote(topnote_item);
