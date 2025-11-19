@@ -42,7 +42,7 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Daw_menu_listener(),this);
         getServer().getPluginManager().registerEvents(new Daw_Item_use_listener(),this);
         getServer().getPluginManager().registerEvents(new Daw_close_inventory_listeners(),this);
-        //getServer().getPluginManager().registerEvents(new PlayerJpinListener(),this);
+        getServer().getPluginManager().registerEvents(new PlayerJpinListener(),this);
         getCommand("getDawItem").setExecutor(new GetDawItem());
         getCommand("getSheetMusic").setExecutor(new GetSheetMusicItem());
         instance = this;
