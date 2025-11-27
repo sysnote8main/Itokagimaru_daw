@@ -12,7 +12,7 @@ public class GetDawItem implements CommandExecutor {
             sender.sendMessage("Only players can execute this command");
             return false;
         }
-        ((Player) sender).performCommand("give @s minecraft:wooden_sword[custom_name=[{\"text\":\"daw\",\"italic\":false,\"color\":\"#95e5f9\"}],item_model=\"minecraft:itokagimaru_daw\"]");
+        player.performCommand("give @s minecraft:wooden_hoe[custom_name=[{\"text\":\"daw\",\"italic\":false,\"color\":\"#95e5f9\"}],item_model=\"minecraft:itokagimaru_daw\"]");
         return true;
     }
 
