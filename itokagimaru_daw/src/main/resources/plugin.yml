@@ -9,3 +9,12 @@ commands:
   getSheetMusic:
     description: /getSheetMusic で空白の楽譜を入手できるよ
     usage: /getSheetMusic
+  getPlayItem:
+    description: /getPlayItem でラジカセを入手できるよ
+    usage: /getPlayItem
+  getCassetteTape:
+    description: /getCassetteTape でカセットテープを入手できるよ
+    usage: /getCassetteTape
+  setCassettesName:
+    description: /setCassettesName でカセットテープに曲名を設定できるよ
+    usage: /setCassettesName

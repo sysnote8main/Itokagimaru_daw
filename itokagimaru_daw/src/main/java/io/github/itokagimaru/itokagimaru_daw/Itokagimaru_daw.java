@@ -1,6 +1,6 @@
 package io.github.itokagimaru.itokagimaru_daw;
 
-import io.github.itokagimaru.itokagimaru_daw.listeners.PlayerJpinListener;
+import io.github.itokagimaru.itokagimaru_daw.commands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -10,11 +10,9 @@ import org.bukkit.event.Listener;
 
 import java.util.*;
 
-import io.github.itokagimaru.itokagimaru_daw.listeners.Daw_menu_listener;
-import io.github.itokagimaru.itokagimaru_daw.listeners.Daw_Item_use_listener;
-import io.github.itokagimaru.itokagimaru_daw.listeners.Daw_close_inventory_listeners;
-import io.github.itokagimaru.itokagimaru_daw.commands.GetDawItem;
-import io.github.itokagimaru.itokagimaru_daw.commands.GetSheetMusicItem;
+import io.github.itokagimaru.itokagimaru_daw.gui.listener.DawClickInventoryListener;
+import io.github.itokagimaru.itokagimaru_daw.listeners.DawItemUseListener;
+import io.github.itokagimaru.itokagimaru_daw.gui.listener.DawCloseInventoryListeners;
 
 
 public final class Itokagimaru_daw extends JavaPlugin implements Listener {
@@ -39,12 +37,15 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
         MusicManager music = new MusicManager();
         music.setSavedMusicList(music.loadMapFile(this));
         Bukkit.getPluginManager().registerEvents(this,this);
-        getServer().getPluginManager().registerEvents(new Daw_menu_listener(),this);
-        getServer().getPluginManager().registerEvents(new Daw_Item_use_listener(),this);
-        getServer().getPluginManager().registerEvents(new Daw_close_inventory_listeners(),this);
+        getServer().getPluginManager().registerEvents(new DawClickInventoryListener(),this);
+        getServer().getPluginManager().registerEvents(new DawItemUseListener(),this);
+        getServer().getPluginManager().registerEvents(new DawCloseInventoryListeners(),this);
         //getServer().getPluginManager().registerEvents(new PlayerJpinListener(),this);
         getCommand("getDawItem").setExecutor(new GetDawItem());
         getCommand("getSheetMusic").setExecutor(new GetSheetMusicItem());
+        getCommand("getPlayItem").setExecutor(new GetPlayItem());
+        getCommand("getCassetteTape").setExecutor(new GetCassetteTape());
+        getCommand("setCassettesName").setExecutor(new SetCssttesName());
         instance = this;
     }
 

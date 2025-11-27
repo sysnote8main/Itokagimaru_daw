@@ -16,5 +16,6 @@ public class InventoryManager {
             return;
         }
         player.getInventory().setContents(inv.get(player.getUniqueId()).clone());
+        inv.remove(player.getUniqueId());
     }
 }

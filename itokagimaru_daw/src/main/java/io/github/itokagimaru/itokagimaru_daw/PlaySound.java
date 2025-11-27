@@ -1,6 +1,5 @@
 package io.github.itokagimaru.itokagimaru_daw;
 
-import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
