@@ -1,10 +1,17 @@
 package io.github.itokagimaru.itokagimaru_daw.commands;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class GetDawItem implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
@@ -12,7 +19,12 @@ public class GetDawItem implements CommandExecutor {
             sender.sendMessage("Only players can execute this command");
             return false;
         }
-        player.performCommand("give @s minecraft:wooden_hoe[custom_name=[{\"text\":\"daw\",\"italic\":false,\"color\":\"#95e5f9\"}],item_model=\"minecraft:itokagimaru_daw\"]");
+        ItemStack stack = new ItemStack(Material.WOODEN_HOE);
+        stack.editMeta(meta -> {
+            meta.setItemModel(NamespacedKey.minecraft("itokagimaru_daw"));
+            meta.customName(Component.text("daw").color(TextColor.color(149,229,249)));
+        });
+        player.give(stack);
         return true;
     }
 

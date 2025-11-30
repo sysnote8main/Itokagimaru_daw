@@ -1,10 +1,16 @@
 package io.github.itokagimaru.itokagimaru_daw.commands;
 
+import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class GetCassetteTape implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
@@ -12,7 +18,14 @@ public class GetCassetteTape implements CommandExecutor {
             sender.sendMessage("Only players can execute this command");
             return false;
         }
-        ((Player) sender).performCommand("give @s minecraft:wooden_hoe[item_model=\"minecraft:cassette_tape\",custom_name=[{\"text\":\"カセットテープ\"}]]");
+        
+        ItemStack stack = new ItemStack(Material.WOODEN_HOE);
+        stack.editMeta(meta -> {
+            meta.customName(Component.text("カセットテープ"));
+            meta.setItemModel(NamespacedKey.minecraft("cassette_tape"));
+        });
+        player.give(stack);
+
         return true;
     }
 }

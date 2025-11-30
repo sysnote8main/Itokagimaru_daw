@@ -1,6 +1,5 @@
 package io.github.itokagimaru.itokagimaru_daw.commands;
 
-import io.github.itokagimaru.itokagimaru_daw.FakeEnchant;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,10 +10,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.Objects;
 
+@NullMarked
 public class SetCssttesName implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
@@ -28,7 +29,7 @@ public class SetCssttesName implements CommandExecutor {
         }
         ItemStack item = player.getInventory().getItemInMainHand();
         NamespacedKey data = new NamespacedKey("name","key");
-        if (item == null || item.getType() == Material.AIR) {
+        if (item.getType() == Material.AIR) {
             player.sendMessage(Component.text("メインハンドにカセットテープを持って実行してください"));
             return true;
         }
@@ -46,7 +47,7 @@ public class SetCssttesName implements CommandExecutor {
             @Nullable List<Component> lore = meta.lore();
             int lines = (lore != null) ? lore.size() : 0;
             if(lines == 2){
-                lore.add(0,Component.text("\"" + args[0] + "\" was recorded in this"));
+                lore.addFirst(Component.text("\"" + args[0] + "\" was recorded in this"));
                 meta.lore(lore);
                 item.setItemMeta(meta);
                 return true;
