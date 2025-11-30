@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class InventoryManager {
     private final HashMap<UUID, ItemStack[]> inv= Itokagimaru_daw.inv;
-    public void seaveInventory(Player player){
+    public void saveInventory(Player player){
         inv.put(player.getUniqueId(),player.getInventory().getContents().clone());
     }
     public void loadInventory(Player player){

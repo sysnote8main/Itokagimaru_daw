@@ -1,13 +1,13 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
+import io.github.itokagimaru.itokagimaru_daw.MakeItem;
+import io.github.itokagimaru.itokagimaru_daw.PdcManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import io.github.itokagimaru.itokagimaru_daw.MakeItem;
-import io.github.itokagimaru.itokagimaru_daw.PdcManager;
 
 import java.util.Objects;
 
@@ -19,15 +19,15 @@ public class MainMenuHolder extends BaseGuiHolder {
     public void setup(){
         ItemStack writable = new ItemStack(Material.WRITABLE_BOOK);
         MakeItem makeItem = new MakeItem();
-        makeItem.setItemMeta(writable,"§e打ち込みモード",null, null, PdcManager.BUTTONID,"INPUT MODE");
+        MakeItem.setItemMeta(writable,"§e打ち込みモード",null, null, PdcManager.BUTTONID,"INPUT MODE");
         this.inv.setItem(3, writable);
 
         ItemStack disc = new ItemStack(Material.MUSIC_DISC_13);
-        makeItem.setItemMeta(disc,"§e再生モード",null, null, PdcManager.BUTTONID,"PLAY MODE");
+        MakeItem.setItemMeta(disc,"§e再生モード",null, null, PdcManager.BUTTONID,"PLAY MODE");
         this.inv.setItem(5, disc);
 
         ItemStack bar = new ItemStack(Material.BARRIER);
-        makeItem.setItemMeta(bar,"§4しゅうりょう",null, null, PdcManager.BUTTONID,"CLOSE");
+        MakeItem.setItemMeta(bar,"§4しゅうりょう",null, null, PdcManager.BUTTONID,"CLOSE");
         this.inv.setItem(8, bar);
     }
     @Override

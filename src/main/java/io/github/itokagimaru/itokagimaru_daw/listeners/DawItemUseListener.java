@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class DawItemUseListener implements Listener {
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event){
+    public static void onPlayerInteract(PlayerInteractEvent event){
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         PdcManager.GetPDC getpdc = new PdcManager.GetPDC();

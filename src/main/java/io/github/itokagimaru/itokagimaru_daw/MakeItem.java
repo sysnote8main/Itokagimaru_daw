@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 public class MakeItem {
-    public void setItemMeta(ItemStack itemstack, String name, int[] nameColor, String model, NamespacedKey key, String val) {
+    public static void setItemMeta(ItemStack itemstack, String name, int[] nameColor, String model, NamespacedKey key, String val) {
         ItemMeta meta = itemstack.getItemMeta();
         if (name != null) {
             var nameComponent = Component.text(name);

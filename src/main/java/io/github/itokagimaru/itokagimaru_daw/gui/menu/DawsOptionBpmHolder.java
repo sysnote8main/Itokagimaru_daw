@@ -19,8 +19,8 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
         ItemStack left = new ItemStack(Material.PAPER);
         ItemStack right = new ItemStack(Material.PAPER);
         MakeItem makeItem = new MakeItem();
-        makeItem.setItemMeta(left,"",null, "next_b_left", PdcManager.BUTTONID,"SHIFT LEFT");
-        makeItem.setItemMeta(right,"",null, "next_b_right", PdcManager.BUTTONID,"SHIFT RIGHT");
+        MakeItem.setItemMeta(left,"",null, "next_b_left", PdcManager.BUTTONID,"SHIFT LEFT");
+        MakeItem.setItemMeta(right,"",null, "next_b_right", PdcManager.BUTTONID,"SHIFT RIGHT");
         inv.setItem(0, left);
         inv.setItem(8, right);
     }
@@ -31,7 +31,7 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
         if (selectedBpm > bpmList.length - 7 ) selectedBpm = bpmList.length - 7;
         PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
         for(int i=0; i<7;i++){
-            makeItem.setItemMeta(green,"set:" + bpmList[selectedBpm + i],null, null, PdcManager.BPM,String.valueOf(bpmList[selectedBpm + i]));
+            MakeItem.setItemMeta(green,"set:" + bpmList[selectedBpm + i],null, null, PdcManager.BPM,String.valueOf(bpmList[selectedBpm + i]));
             green.setItemMeta(setPdc.addStr(green,PdcManager.BUTTONID,"SET BPM"));
             inv.setItem(i+1, green);
         }
@@ -50,7 +50,7 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
         Player player = (Player) event.getWhoClicked();
         ItemStack clicked = event.getCurrentItem();
         if(clicked == null) return;
-        
+
         PdcManager.GetPDC getPdc = new PdcManager.GetPDC();
 
         String buttonId = getPdc.buttonId(clicked);

@@ -1,6 +1,10 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
-import io.github.itokagimaru.itokagimaru_daw.*;
+import io.github.itokagimaru.itokagimaru_daw.ByteArrayManager;
+import io.github.itokagimaru.itokagimaru_daw.Itokagimaru_daw;
+import io.github.itokagimaru.itokagimaru_daw.MakeItem;
+import io.github.itokagimaru.itokagimaru_daw.PdcManager;
+import io.github.itokagimaru.itokagimaru_daw.PlayMusic;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -21,10 +25,10 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
     public void setup() {
         MakeItem makeItem = new MakeItem();
         ItemStack play = new ItemStack(Material.PAPER);
-        makeItem.setItemMeta(play,"再生",null, "next_b_right", PdcManager.BUTTONID,"PLAY");
+        MakeItem.setItemMeta(play,"再生",null, "next_b_right", PdcManager.BUTTONID,"PLAY");
         inv.setItem(4, play);
         ItemStack bar = new ItemStack(Material.BARRIER);
-        makeItem.setItemMeta(bar,"未選択",null, null,null,null);
+        MakeItem.setItemMeta(bar,"未選択",null, null,null,null);
         inv.setItem(7, bar);
     }
     @Override
@@ -39,7 +43,7 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
             inv.setItem(7, recordButton);
             ItemStack clock = new ItemStack(Material.CLOCK);
             int bpm = getPdc.bpm(clickedItem);
-            makeItem.setItemMeta(clock, "BPM", null, null, null, null);
+            MakeItem.setItemMeta(clock, "BPM", null, null, null, null);
             ItemMeta meta = clock.getItemMeta();
             meta.lore(List.of(Component.text("現在のBPM設定:"+ bpm)));
             clock.setItemMeta(meta);
@@ -47,7 +51,7 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
         }else if(Objects.equals(getPdc.buttonId(clickedItem), "RECORD BUTTON")) {
             MakeItem makeItem = new MakeItem();
             ItemStack bar = new ItemStack(Material.BARRIER);
-            makeItem.setItemMeta(bar,"未選択",null, null,null,null);
+            MakeItem.setItemMeta(bar,"未選択",null, null,null,null);
             inv.setItem(7, bar);
             inv.setItem(1,null);
         } else if (Objects.equals(getPdc.buttonId(clickedItem), "PLAY")) {
@@ -55,7 +59,7 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
             double bpm = getPdc.bpm(Objects.requireNonNull(clicked_inv.getItem(7)));
             if (bpm == -1)return;
             MakeItem makeItem = new MakeItem();
-            makeItem.setItemMeta(clickedItem,"再生停止",null, "elytra", PdcManager.BUTTONID, "STOP");
+            MakeItem.setItemMeta(clickedItem,"再生停止",null, "elytra", PdcManager.BUTTONID, "STOP");
             Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
             PlayMusic play = new PlayMusic();
             Player player = (Player) event.getWhoClicked();
@@ -68,7 +72,7 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
             Player player = (Player) event.getWhoClicked();
             PlayMusic play = playing.get_playing(player);
             MakeItem makeItem = new MakeItem();
-            makeItem.setItemMeta(clickedItem, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
+            MakeItem.setItemMeta(clickedItem, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
             play.stop_task();
         }
     }

@@ -10,14 +10,14 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.List;
 
 public class SheetMusicManager {
-    public ItemMeta makeSheetMusic(Player player){
+    public static ItemMeta makeSheetMusic(Player player){
         MusicManager musicManager = new MusicManager();
         int[] musicList = musicManager.loadMusic(player);
         ByteArrayManager byteArrayManager = new ByteArrayManager();
         byte[] data = byteArrayManager.encode(musicList);
         ItemStack item = new ItemStack(Material.WOODEN_HOE);
         MakeItem makeItem = new MakeItem();
-        makeItem.setItemMeta(item,"記述済みの楽譜", null, "written_sheet_music",null,null);
+        MakeItem.setItemMeta(item,"記述済みの楽譜", null, "written_sheet_music",null,null);
         ItemMeta meta = item.getItemMeta();
         PlaySound playSound = new PlaySound();
         playSound.playPageTurn(player);

@@ -13,17 +13,15 @@ public class PlayMusic {
     public void play_music (Player player,int[] lodedMusic, long interval){
         task = new BukkitRunnable() {
             int count = 0;
-            MakeItem makeitem = new MakeItem();
-            PlaySound playSound = new PlaySound();
             @Override
             public void run() {
-                if (lodedMusic[count] == -1 || count >= lodedMusic.length) {
+                if (lodedMusic[count] == -1) {
                     ItemStack play = new ItemStack(Material.PAPER);
-                    makeitem.setItemMeta(play,"再生",null, "next_b_right",PdcManager.BUTTONID,"PLAY");
+                    MakeItem.setItemMeta(play,"再生",null, "next_b_right",PdcManager.BUTTONID,"PLAY");
                     player.getOpenInventory().getTopInventory().setItem(4,play);
                     cancel();
                 }else if(lodedMusic[count] != 0){
-                    playSound.playNote(player,lodedMusic[count]);
+                    PlaySound.playNote(player,lodedMusic[count]);
 
                     ParticleManager particlemanager = new ParticleManager();
                     particlemanager.playNote(player);

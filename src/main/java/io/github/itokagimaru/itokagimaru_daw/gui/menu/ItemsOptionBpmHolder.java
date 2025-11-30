@@ -1,6 +1,10 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
-import io.github.itokagimaru.itokagimaru_daw.*;
+import io.github.itokagimaru.itokagimaru_daw.ByteArrayManager;
+import io.github.itokagimaru.itokagimaru_daw.FakeEnchant;
+import io.github.itokagimaru.itokagimaru_daw.MakeItem;
+import io.github.itokagimaru.itokagimaru_daw.MusicManager;
+import io.github.itokagimaru.itokagimaru_daw.PdcManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -24,7 +28,7 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
             int bpm = getPdc.bpm(clicked);
             MakeItem makeItem = new MakeItem();
             ItemStack item = new ItemStack(Material.WOODEN_HOE);
-            makeItem.setItemMeta(item,"記録済みのカセットテープ",null, "cassette_tape",PdcManager.BPM,String.valueOf(bpm));
+            MakeItem.setItemMeta(item,"記録済みのカセットテープ",null, "cassette_tape",PdcManager.BPM,String.valueOf(bpm));
             PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
             item.setItemMeta(setPdc.addStr(item, PdcManager.BUTTONID, "RECORD ITEM"));
             ItemMeta meta = item.getItemMeta();
@@ -35,8 +39,7 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
             meta.getPersistentDataContainer().set(PdcManager.BYTELIST, PersistentDataType.BYTE_ARRAY, data);
             meta.lore(List.of(Component.text("BPM:" + bpm),Component.text("recorded by " + player.getName())));
             item.setItemMeta(meta);
-            FakeEnchant fakeEnchant = new FakeEnchant();
-            item.setItemMeta(fakeEnchant.fakeEnchant(item));
+            FakeEnchant.addFakeEnchant(item);
             player.getInventory().setItemInMainHand(item);
             player.closeInventory();
         }else if (Objects.equals(buttonId, "SHIFT RIGHT")) {
