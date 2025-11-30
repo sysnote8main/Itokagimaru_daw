@@ -9,8 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Objects;
-
 public class DawsOptionBpmHolder extends BaseGuiHolder {
     int[] bpmList = {1,2,3,4,5,6,8,10,12,15,16,20,24,25,30,40,48,50,60,75,80,100,120,150,200,240,300,400,600,1200};
     public DawsOptionBpmHolder() {
@@ -51,25 +49,31 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         ItemStack clicked = event.getCurrentItem();
+        if(clicked == null) return;
+        
         PdcManager.GetPDC getPdc = new PdcManager.GetPDC();
 
         String buttonId = getPdc.buttonId(clicked);
-        if (Objects.equals(buttonId, "SET BPM")) {
-            int bpm = getPdc.bpm(clicked);
-            DawsPlayModeHolder dawsPlayModeHolder = new DawsPlayModeHolder(bpm);
-            player.openInventory(dawsPlayModeHolder.getInventory());
-        }else if (Objects.equals(buttonId, "SHIFT RIGHT")) {
-            int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
-            selectBpmId += 1;
-            if (selectBpmId > bpmList.length - 7 ) selectBpmId = bpmList.length - 7;
-            int bpm = bpmList[selectBpmId];
-            updateBpmIcons(bpm);
-        }else if (Objects.equals(buttonId, "SHIFT LEFT")) {
-            int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
-            selectBpmId -= 1;
-            if (selectBpmId < 0 ) selectBpmId = 0;
-            int bpm = bpmList[selectBpmId];
-            updateBpmIcons(bpm);
+        switch (buttonId) {
+            case "SET BPM" -> {
+                int bpm = getPdc.bpm(clicked);
+                DawsPlayModeHolder dawsPlayModeHolder = new DawsPlayModeHolder(bpm);
+                player.openInventory(dawsPlayModeHolder.getInventory());
+            }
+            case "SHIFT RIGHT" -> {
+                int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
+                selectBpmId += 1;
+                if (selectBpmId > bpmList.length - 7) selectBpmId = bpmList.length - 7;
+                int bpm = bpmList[selectBpmId];
+                updateBpmIcons(bpm);
+            }
+            case "SHIFT LEFT" -> {
+                int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
+                selectBpmId -= 1;
+                if (selectBpmId < 0) selectBpmId = 0;
+                int bpm = bpmList[selectBpmId];
+                updateBpmIcons(bpm);
+            }
         }
 
     }

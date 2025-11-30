@@ -7,15 +7,14 @@ import io.github.itokagimaru.itokagimaru_daw.gui.menu.ItemsOptionBpmHolder;
 import io.github.itokagimaru.itokagimaru_daw.gui.menu.ItemsPlayModeHolder;
 import io.github.itokagimaru.itokagimaru_daw.gui.menu.MainMenuHolder;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-
 
 import java.util.Objects;
 
@@ -28,25 +27,27 @@ public class DawItemUseListener implements Listener {
         if(!(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)){
             return;
         }
-        if(item ==  null) return;
+        if(item == null) return;
+        if(item.getType() != Material.WOODEN_HOE) return;
+
         if (item.getItemMeta().hasItemModel()) {
             NamespacedKey data = item.getItemMeta().getItemModel();
             event.setCancelled(true);
-            if (item.getType() == Material.WOODEN_HOE && Objects.equals(data, NamespacedKey.minecraft("itokagimaru_daw"))) {
+            if (Objects.equals(data, NamespacedKey.minecraft("itokagimaru_daw"))) {
                 MainMenuHolder mainMenuHolder = new MainMenuHolder();
                 player.openInventory(mainMenuHolder.getInventory());
-            } else if (item.getType() == Material.WOODEN_HOE && Objects.equals(data, NamespacedKey.minecraft("blank_sheet_music"))) {
+            } else if (Objects.equals(data, NamespacedKey.minecraft("blank_sheet_music"))) {
                 SheetMusicManager sheetMusicManage = new SheetMusicManager();
                 item.setItemMeta(sheetMusicManage.makeSheetMusic(player));
-            } else if (item.getType() == Material.WOODEN_HOE && Objects.equals(data, NamespacedKey.minecraft("written_sheet_music"))) {
+            } else if (Objects.equals(data, NamespacedKey.minecraft("written_sheet_music"))) {
                 SheetMusicManager sheetMusicManage = new SheetMusicManager();
                 sheetMusicManage.lodeSheetMusic(player,item);
-            } else if (item.getType() == Material.WOODEN_HOE && Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))) {
+            } else if (Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))) {
                 if(getpdc.bpm(item) != -1)return;
                 ItemsOptionBpmHolder itemsOptionBpmHolder = new ItemsOptionBpmHolder();
                 itemsOptionBpmHolder.updateBpmIcons(60);
                 player.openInventory(itemsOptionBpmHolder.getInventory());
-            } else if (item.getType() == Material.WOODEN_HOE && Objects.equals(data, NamespacedKey.minecraft("walkman"))) {
+            } else if (Objects.equals(data, NamespacedKey.minecraft("walkman"))) {
                 SwapItems swapItems = new SwapItems();
                 swapItems.mainAndHead(player);
                 Location location = player.getLocation();

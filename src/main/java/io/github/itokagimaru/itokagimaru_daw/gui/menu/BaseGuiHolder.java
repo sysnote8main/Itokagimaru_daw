@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseGuiHolder implements InventoryHolder {
     protected Inventory inv;
@@ -12,7 +13,7 @@ public abstract class BaseGuiHolder implements InventoryHolder {
     public abstract void onClose(Player player);
 
     @Override
-    public Inventory getInventory() {
+    public @NotNull Inventory getInventory() {
         return inv;
     }
 }
