@@ -8,7 +8,6 @@ import io.github.itokagimaru.itokagimaru_daw.commands.SetCssttesName;
 import io.github.itokagimaru.itokagimaru_daw.gui.listener.DawClickInventoryListener;
 import io.github.itokagimaru.itokagimaru_daw.gui.listener.DawCloseInventoryListeners;
 import io.github.itokagimaru.itokagimaru_daw.listeners.DawItemUseListener;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
@@ -31,21 +30,29 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        // setup music manager
         MusicManager music = new MusicManager();
         music.setSavedMusicList(music.loadMapFile(this));
-        Bukkit.getPluginManager().registerEvents(this, this);
+        getSLF4JLogger().info("曲をロードしました。");
+
+        // listener
         registerListeners(
+                this,
                 new DawClickInventoryListener(),
                 new DawItemUseListener(),
                 new DawCloseInventoryListeners()
         );
+        getSLF4JLogger().info("イベントリスナーを登録しました。");
+
+        // command
         //getServer().getPluginManager().registerEvents(new PlayerJpinListener(),this);
         registerCommand("getDawItem", new GetDawItem());
         registerCommand("getSheetMusic", new GetSheetMusicItem());
         registerCommand("getPlayItem", new GetPlayItem());
         registerCommand("getCassetteTape", new GetCassetteTape());
         registerCommand("setCassettesName", new SetCssttesName());
+        getSLF4JLogger().info("コマンドを登録しました。");
+
         instance = this;
     }
 
