@@ -19,12 +19,12 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
     public void setup(int bpm) {
         ItemStack clock = new ItemStack(Material.PAPER);
         MakeItem makeItem = new MakeItem();
-        clock.setItemMeta(makeItem.makeItemMeta(clock,"現在のBPM:" + String.valueOf(bpm),null, "clock", PdcManager.BPM,String.valueOf(bpm)));
+        makeItem.setItemMeta(clock,"現在のBPM:" + bpm,null, "clock", PdcManager.BPM,String.valueOf(bpm));
         PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
         clock.setItemMeta(setPdc.addStr(clock,PdcManager.BUTTONID,"OPTION BPM"));
         inv.setItem(2, clock);
         ItemStack play = new ItemStack(Material.PAPER);
-        play.setItemMeta(makeItem.makeItemMeta(play,"再生",null, "next_b_right", PdcManager.BUTTONID,"PLAY"));
+        makeItem.setItemMeta(play,"再生",null, "next_b_right", PdcManager.BUTTONID,"PLAY");
         inv.setItem(4, play);
     }
     @Override
@@ -42,7 +42,7 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
         }else if (Objects.equals(getPdc.buttonId(clicked), "PLAY")) {
             double bpm = (double) getPdc.bpm(Objects.requireNonNull(clicked_inv.getItem(2)));
             MakeItem makeItem = new MakeItem();
-            clicked.setItemMeta(makeItem.makeItemMeta(clicked,"再生停止",null, "elytra", PdcManager.BUTTONID, "STOP"));
+            makeItem.setItemMeta(clicked,"再生停止",null, "elytra", PdcManager.BUTTONID, "STOP");
             Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
             PlayMusic play = new PlayMusic();
             playing.set_playing(player,play);
@@ -52,7 +52,7 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
             Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
             PlayMusic play = playing.get_playing(player);
             MakeItem makeItem = new MakeItem();
-            clicked.setItemMeta(makeItem.makeItemMeta(clicked, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY"));
+            makeItem.setItemMeta(clicked, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
             play.stop_task();
         }
     }

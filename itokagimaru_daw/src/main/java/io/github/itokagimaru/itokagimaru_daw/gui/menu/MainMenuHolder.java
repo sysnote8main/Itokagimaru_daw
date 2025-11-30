@@ -19,15 +19,15 @@ public class MainMenuHolder extends BaseGuiHolder {
     public void setup(){
         ItemStack writable = new ItemStack(Material.WRITABLE_BOOK);
         MakeItem makeItem = new MakeItem();
-        writable.setItemMeta(makeItem.makeItemMeta(writable,"§e打ち込みモード",null, null, PdcManager.BUTTONID,"INPUT MODE"));
+        makeItem.setItemMeta(writable,"§e打ち込みモード",null, null, PdcManager.BUTTONID,"INPUT MODE");
         this.inv.setItem(3, writable);
 
         ItemStack disc = new ItemStack(Material.MUSIC_DISC_13);
-        disc.setItemMeta(makeItem.makeItemMeta(disc,"§e再生モード",null, null, PdcManager.BUTTONID,"PLAY MODE"));
+        makeItem.setItemMeta(disc,"§e再生モード",null, null, PdcManager.BUTTONID,"PLAY MODE");
         this.inv.setItem(5, disc);
 
         ItemStack bar = new ItemStack(Material.BARRIER);
-        bar.setItemMeta(makeItem.makeItemMeta(bar,"§4しゅうりょう",null, null, PdcManager.BUTTONID,"CLOSE"));
+        makeItem.setItemMeta(bar,"§4しゅうりょう",null, null, PdcManager.BUTTONID,"CLOSE");
         this.inv.setItem(8, bar);
     }
     @Override

@@ -24,7 +24,7 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
             int bpm = getPdc.bpm(clicked);
             MakeItem makeItem = new MakeItem();
             ItemStack item = new ItemStack(Material.WOODEN_HOE);
-            item.setItemMeta(makeItem.makeItemMeta(item,"記録済みのカセットテープ",null, "cassette_tape",PdcManager.BPM,String.valueOf(bpm)));
+            makeItem.setItemMeta(item,"記録済みのカセットテープ",null, "cassette_tape",PdcManager.BPM,String.valueOf(bpm));
             PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
             item.setItemMeta(setPdc.addStr(item, PdcManager.BUTTONID, "RECORD ITEM"));
             ItemMeta meta = item.getItemMeta();

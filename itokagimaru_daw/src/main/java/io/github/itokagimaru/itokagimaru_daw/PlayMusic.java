@@ -19,7 +19,7 @@ public class PlayMusic {
             public void run() {
                 if (lodedMusic[count] == -1 || count >= lodedMusic.length) {
                     ItemStack play = new ItemStack(Material.PAPER);
-                    play.setItemMeta(makeitem.makeItemMeta(play,"再生",null, "next_b_right",PdcManager.BUTTONID,"PLAY"));
+                    makeitem.setItemMeta(play,"再生",null, "next_b_right",PdcManager.BUTTONID,"PLAY");
                     player.getOpenInventory().getTopInventory().setItem(4,play);
                     cancel();
                 }else if(lodedMusic[count] != 0){

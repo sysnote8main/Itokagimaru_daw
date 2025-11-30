@@ -21,8 +21,8 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
         ItemStack left = new ItemStack(Material.PAPER);
         ItemStack right = new ItemStack(Material.PAPER);
         MakeItem makeItem = new MakeItem();
-        left.setItemMeta(makeItem.makeItemMeta(left,"",null, "next_b_left", PdcManager.BUTTONID,"SHIFT LEFT"));
-        right.setItemMeta(makeItem.makeItemMeta(right,"",null, "next_b_right", PdcManager.BUTTONID,"SHIFT RIGHT"));
+        makeItem.setItemMeta(left,"",null, "next_b_left", PdcManager.BUTTONID,"SHIFT LEFT");
+        makeItem.setItemMeta(right,"",null, "next_b_right", PdcManager.BUTTONID,"SHIFT RIGHT");
         inv.setItem(0, left);
         inv.setItem(8, right);
     }
@@ -33,7 +33,7 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
         if (selectedBpm > bpmList.length - 7 ) selectedBpm = bpmList.length - 7;
         PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
         for(int i=0; i<7;i++){
-            green.setItemMeta(makeItem.makeItemMeta(green,"set:" + bpmList[selectedBpm + i],null, null, PdcManager.BPM,String.valueOf(bpmList[selectedBpm + i])));
+            makeItem.setItemMeta(green,"set:" + bpmList[selectedBpm + i],null, null, PdcManager.BPM,String.valueOf(bpmList[selectedBpm + i]));
             green.setItemMeta(setPdc.addStr(green,PdcManager.BUTTONID,"SET BPM"));
             inv.setItem(i+1, green);
         }
