@@ -1,4 +1,4 @@
-package io.github.itokagimaru.itokagimaru_daw;
+package io.github.itokagimaru.itokagimaru_daw.util;
 
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -16,7 +16,7 @@ public class PlaySound {
         player.getWorld().playSound(player.getLocation().add(0, 2, 0), Sound.ITEM_BOOK_PAGE_TURN, 2f, 1f);
     }
 
-    public void playLavelup(Player player) {
+    public void playLevelUp(Player player) {
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f);
     }
 }

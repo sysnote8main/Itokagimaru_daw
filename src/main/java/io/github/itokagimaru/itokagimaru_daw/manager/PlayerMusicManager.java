@@ -1,5 +1,6 @@
-package io.github.itokagimaru.itokagimaru_daw;
+package io.github.itokagimaru.itokagimaru_daw.manager;
 
+import io.github.itokagimaru.itokagimaru_daw.task.PlayMusic;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;

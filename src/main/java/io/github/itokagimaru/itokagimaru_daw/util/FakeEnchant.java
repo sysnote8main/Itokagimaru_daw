@@ -1,4 +1,4 @@
-package io.github.itokagimaru.itokagimaru_daw;
+package io.github.itokagimaru.itokagimaru_daw.util;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;

@@ -1,4 +1,4 @@
-package io.github.itokagimaru.itokagimaru_daw;
+package io.github.itokagimaru.itokagimaru_daw.manager;
 
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;

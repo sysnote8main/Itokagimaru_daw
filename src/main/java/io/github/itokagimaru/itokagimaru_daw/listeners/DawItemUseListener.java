@@ -1,11 +1,11 @@
 package io.github.itokagimaru.itokagimaru_daw.listeners;
 
-import io.github.itokagimaru.itokagimaru_daw.PdcManager;
-import io.github.itokagimaru.itokagimaru_daw.SheetMusicManager;
-import io.github.itokagimaru.itokagimaru_daw.SwapItems;
 import io.github.itokagimaru.itokagimaru_daw.gui.menu.ItemsOptionBpmHolder;
 import io.github.itokagimaru.itokagimaru_daw.gui.menu.ItemsPlayModeHolder;
 import io.github.itokagimaru.itokagimaru_daw.gui.menu.MainMenuHolder;
+import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
+import io.github.itokagimaru.itokagimaru_daw.manager.SheetMusicManager;
+import io.github.itokagimaru.itokagimaru_daw.util.SwapItems;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -49,7 +49,7 @@ public class DawItemUseListener implements Listener {
                 player.openInventory(itemsOptionBpmHolder.getInventory());
             } else if (Objects.equals(data, NamespacedKey.minecraft("walkman"))) {
                 SwapItems swapItems = new SwapItems();
-                swapItems.mainAndHead(player);
+                SwapItems.mainAndHead(player);
                 Location location = player.getLocation();
                 location.setPitch(0);
                 player.teleport(location);

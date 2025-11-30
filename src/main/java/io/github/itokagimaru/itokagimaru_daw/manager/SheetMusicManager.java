@@ -1,5 +1,7 @@
-package io.github.itokagimaru.itokagimaru_daw;
+package io.github.itokagimaru.itokagimaru_daw.manager;
 
+import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
+import io.github.itokagimaru.itokagimaru_daw.util.PlaySound;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -32,6 +34,6 @@ public class SheetMusicManager {
         MusicManager musicManager = new MusicManager();
         musicManager.saveMusic(player, music);
         PlaySound playSound = new PlaySound();
-        playSound.playLavelup(player);
+        playSound.playLevelUp(player);
     }
 }

@@ -1,5 +1,6 @@
-package io.github.itokagimaru.itokagimaru_daw;
+package io.github.itokagimaru.itokagimaru_daw.manager;
 
+import io.github.itokagimaru.itokagimaru_daw.Itokagimaru_daw;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

@@ -1,4 +1,4 @@
-package io.github.itokagimaru.itokagimaru_daw;
+package io.github.itokagimaru.itokagimaru_daw.manager;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;

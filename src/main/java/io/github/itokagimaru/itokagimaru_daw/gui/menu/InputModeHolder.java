@@ -1,10 +1,10 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
-import io.github.itokagimaru.itokagimaru_daw.InventoryManager;
 import io.github.itokagimaru.itokagimaru_daw.Itokagimaru_daw;
-import io.github.itokagimaru.itokagimaru_daw.MakeItem;
-import io.github.itokagimaru.itokagimaru_daw.MusicManager;
-import io.github.itokagimaru.itokagimaru_daw.PdcManager;
+import io.github.itokagimaru.itokagimaru_daw.manager.InventoryManager;
+import io.github.itokagimaru.itokagimaru_daw.manager.MusicManager;
+import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
+import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
