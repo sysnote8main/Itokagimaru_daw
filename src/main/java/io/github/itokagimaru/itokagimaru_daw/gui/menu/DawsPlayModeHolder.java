@@ -1,10 +1,10 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
-import io.github.itokagimaru.itokagimaru_daw.Itokagimaru_daw;
 import io.github.itokagimaru.itokagimaru_daw.MakeItem;
 import io.github.itokagimaru.itokagimaru_daw.MusicManager;
 import io.github.itokagimaru.itokagimaru_daw.PdcManager;
 import io.github.itokagimaru.itokagimaru_daw.PlayMusic;
+import io.github.itokagimaru.itokagimaru_daw.PlayerMusicManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -47,14 +47,12 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
         } else if (Objects.equals(getPdc.buttonId(clicked), "PLAY")) {
             double bpm = getPdc.bpm(Objects.requireNonNull(clicked_inv.getItem(2)));
             MakeItem.setItemMeta(clicked, "再生停止", null, "elytra", PdcManager.BUTTONID, "STOP");
-            Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
             PlayMusic play = new PlayMusic();
-            playing.set_playing(player, play);
+            PlayerMusicManager.setPlayingMusic(player, play);
             MusicManager music = new MusicManager();
             play.play_music(player, music.loadMusic(player), (long) (1200 / bpm));
         } else if (Objects.equals(getPdc.buttonId(clicked), "STOP")) {
-            Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
-            PlayMusic play = playing.get_playing(player);
+            PlayMusic play = PlayerMusicManager.getMusic(player);
             MakeItem.setItemMeta(clicked, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
             play.stop_task();
         }
@@ -62,8 +60,7 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
 
     @Override
     public void onClose(Player player) {
-        Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
-        PlayMusic play = playing.get_playing(player);
+        PlayMusic play = PlayerMusicManager.getMusic(player);
         if (play == null) return;
         play.stop_task();
     }

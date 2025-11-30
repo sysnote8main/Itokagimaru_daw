@@ -11,7 +11,6 @@ import io.github.itokagimaru.itokagimaru_daw.listeners.DawItemUseListener;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
@@ -24,17 +23,6 @@ import java.util.UUID;
 
 public final class Itokagimaru_daw extends JavaPlugin implements Listener {
     public static Itokagimaru_daw instance;
-    public static HashMap<UUID, PlayMusic> playing = new HashMap<>();
-
-    public static class operation_playing {
-        public void set_playing(Player player, PlayMusic play) {
-            playing.put(player.getUniqueId(), play);
-        }
-
-        public PlayMusic get_playing(Player player) {
-            return playing.get(player.getUniqueId());
-        }
-    }
 
     public static Map<UUID, int[]> savedMusicList = new HashMap<>();
     public static HashMap<UUID, ItemStack[]> inv = new HashMap<>();
