@@ -28,7 +28,7 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
             int bpm = getPdc.bpm(clicked);
             MakeItem makeItem = new MakeItem();
             ItemStack item = new ItemStack(Material.WOODEN_HOE);
-            MakeItem.setItemMeta(item,"記録済みのカセットテープ",null, "cassette_tape",PdcManager.BPM,String.valueOf(bpm));
+            MakeItem.setItemMeta(item, "記録済みのカセットテープ", null, "cassette_tape", PdcManager.BPM, String.valueOf(bpm));
             PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
             item.setItemMeta(setPdc.addStr(item, PdcManager.BUTTONID, "RECORD ITEM"));
             ItemMeta meta = item.getItemMeta();
@@ -37,21 +37,21 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
             ByteArrayManager byteArrayManager = new ByteArrayManager();
             byte[] data = byteArrayManager.encode(musicList);
             meta.getPersistentDataContainer().set(PdcManager.BYTELIST, PersistentDataType.BYTE_ARRAY, data);
-            meta.lore(List.of(Component.text("BPM:" + bpm),Component.text("recorded by " + player.getName())));
+            meta.lore(List.of(Component.text("BPM:" + bpm), Component.text("recorded by " + player.getName())));
             item.setItemMeta(meta);
             FakeEnchant.addFakeEnchant(item);
             player.getInventory().setItemInMainHand(item);
             player.closeInventory();
-        }else if (Objects.equals(buttonId, "SHIFT RIGHT")) {
+        } else if (Objects.equals(buttonId, "SHIFT RIGHT")) {
             int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
             selectBpmId += 1;
-            if (selectBpmId > bpmList.length - 7 ) selectBpmId = bpmList.length - 7;
+            if (selectBpmId > bpmList.length - 7) selectBpmId = bpmList.length - 7;
             int bpm = bpmList[selectBpmId];
             updateBpmIcons(bpm);
-        }else if (Objects.equals(buttonId, "SHIFT LEFT")) {
+        } else if (Objects.equals(buttonId, "SHIFT LEFT")) {
             int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
             selectBpmId -= 1;
-            if (selectBpmId < 0 ) selectBpmId = 0;
+            if (selectBpmId < 0) selectBpmId = 0;
             int bpm = bpmList[selectBpmId];
             updateBpmIcons(bpm);
         }

@@ -20,15 +20,15 @@ import java.util.Objects;
 
 public class DawItemUseListener implements Listener {
     @EventHandler
-    public static void onPlayerInteract(PlayerInteractEvent event){
+    public static void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         PdcManager.GetPDC getpdc = new PdcManager.GetPDC();
-        if(!(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)){
+        if (!(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             return;
         }
-        if(item == null) return;
-        if(item.getType() != Material.WOODEN_HOE) return;
+        if (item == null) return;
+        if (item.getType() != Material.WOODEN_HOE) return;
 
         if (item.getItemMeta().hasItemModel()) {
             NamespacedKey data = item.getItemMeta().getItemModel();
@@ -41,9 +41,9 @@ public class DawItemUseListener implements Listener {
                 item.setItemMeta(sheetMusicManage.makeSheetMusic(player));
             } else if (Objects.equals(data, NamespacedKey.minecraft("written_sheet_music"))) {
                 SheetMusicManager sheetMusicManage = new SheetMusicManager();
-                sheetMusicManage.lodeSheetMusic(player,item);
+                sheetMusicManage.lodeSheetMusic(player, item);
             } else if (Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))) {
-                if(getpdc.bpm(item) != -1)return;
+                if (getpdc.bpm(item) != -1) return;
                 ItemsOptionBpmHolder itemsOptionBpmHolder = new ItemsOptionBpmHolder();
                 itemsOptionBpmHolder.updateBpmIcons(60);
                 player.openInventory(itemsOptionBpmHolder.getInventory());

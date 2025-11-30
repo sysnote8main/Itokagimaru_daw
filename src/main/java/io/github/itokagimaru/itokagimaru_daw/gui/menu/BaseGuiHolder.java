@@ -10,6 +10,7 @@ public abstract class BaseGuiHolder implements InventoryHolder {
     protected Inventory inv;
 
     public abstract void onClick(InventoryClickEvent event);
+
     public abstract void onClose(Player player);
 
     @Override

@@ -22,21 +22,23 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
         inv = Bukkit.createInventory(this, 9, Component.text("PlayMode"));
         setup();
     }
+
     public void setup() {
         MakeItem makeItem = new MakeItem();
         ItemStack play = new ItemStack(Material.PAPER);
-        MakeItem.setItemMeta(play,"再生",null, "next_b_right", PdcManager.BUTTONID,"PLAY");
+        MakeItem.setItemMeta(play, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
         inv.setItem(4, play);
         ItemStack bar = new ItemStack(Material.BARRIER);
-        MakeItem.setItemMeta(bar,"未選択",null, null,null,null);
+        MakeItem.setItemMeta(bar, "未選択", null, null, null, null);
         inv.setItem(7, bar);
     }
+
     @Override
     public void onClick(InventoryClickEvent event) {
         ItemStack clickedItem = event.getCurrentItem();
         PdcManager.GetPDC getPdc = new PdcManager.GetPDC();
         PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
-        if(Objects.equals(getPdc.buttonId(clickedItem), "RECORD ITEM")) {
+        if (Objects.equals(getPdc.buttonId(clickedItem), "RECORD ITEM")) {
             MakeItem makeItem = new MakeItem();
             ItemStack recordButton = clickedItem.clone();
             recordButton.setItemMeta(setPdc.addStr(recordButton, PdcManager.BUTTONID, "RECORD BUTTON"));
@@ -45,28 +47,28 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
             int bpm = getPdc.bpm(clickedItem);
             MakeItem.setItemMeta(clock, "BPM", null, null, null, null);
             ItemMeta meta = clock.getItemMeta();
-            meta.lore(List.of(Component.text("現在のBPM設定:"+ bpm)));
+            meta.lore(List.of(Component.text("現在のBPM設定:" + bpm)));
             clock.setItemMeta(meta);
             inv.setItem(1, clock);
-        }else if(Objects.equals(getPdc.buttonId(clickedItem), "RECORD BUTTON")) {
+        } else if (Objects.equals(getPdc.buttonId(clickedItem), "RECORD BUTTON")) {
             MakeItem makeItem = new MakeItem();
             ItemStack bar = new ItemStack(Material.BARRIER);
-            MakeItem.setItemMeta(bar,"未選択",null, null,null,null);
+            MakeItem.setItemMeta(bar, "未選択", null, null, null, null);
             inv.setItem(7, bar);
-            inv.setItem(1,null);
+            inv.setItem(1, null);
         } else if (Objects.equals(getPdc.buttonId(clickedItem), "PLAY")) {
             Inventory clicked_inv = event.getClickedInventory();
             double bpm = getPdc.bpm(Objects.requireNonNull(clicked_inv.getItem(7)));
-            if (bpm == -1)return;
+            if (bpm == -1) return;
             MakeItem makeItem = new MakeItem();
-            MakeItem.setItemMeta(clickedItem,"再生停止",null, "elytra", PdcManager.BUTTONID, "STOP");
+            MakeItem.setItemMeta(clickedItem, "再生停止", null, "elytra", PdcManager.BUTTONID, "STOP");
             Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
             PlayMusic play = new PlayMusic();
             Player player = (Player) event.getWhoClicked();
-            playing.set_playing(player,play);
+            playing.set_playing(player, play);
             ByteArrayManager byteArrayManager = new ByteArrayManager();
             int[] music = byteArrayManager.decode(getPdc.bytelist(clicked_inv.getItem(7)));
-            play.play_music(player, music, (long) (1200/bpm));
+            play.play_music(player, music, (long) (1200 / bpm));
         } else if (Objects.equals(getPdc.buttonId(clickedItem), "STOP")) {
             Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
             Player player = (Player) event.getWhoClicked();
@@ -76,6 +78,7 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
             play.stop_task();
         }
     }
+
     @Override
     public void onClose(Player player) {
         Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();

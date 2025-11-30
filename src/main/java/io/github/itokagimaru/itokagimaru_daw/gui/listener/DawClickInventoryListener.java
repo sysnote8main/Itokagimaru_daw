@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class DawClickInventoryListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if(!(event.getInventory().getHolder() instanceof BaseGuiHolder baseGuiHolder)) return;
+        if (!(event.getInventory().getHolder() instanceof BaseGuiHolder baseGuiHolder)) return;
         ItemStack clicked = event.getCurrentItem();
         if (clicked == null || clicked.getType() == Material.AIR) {
             return;

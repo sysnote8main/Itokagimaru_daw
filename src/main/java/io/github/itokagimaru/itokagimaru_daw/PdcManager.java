@@ -9,7 +9,11 @@ import java.util.Objects;
 
 public class PdcManager {
     private static final String NAME_KEY = "itokagimaru_daw";
-    private PdcManager() {};
+
+    private PdcManager() {
+    }
+
+    ;
     public static NamespacedKey PAGE = new NamespacedKey(NAME_KEY, "page");
     public static NamespacedKey BPM = new NamespacedKey(NAME_KEY, "bpm");
     public static NamespacedKey TOPNOTE = new NamespacedKey(NAME_KEY, "topnote");
@@ -27,45 +31,54 @@ public class PdcManager {
             if (pdc == null) return -1;
             return Integer.parseInt(Objects.requireNonNull(pdc));
         }
+
         public int topnote(ItemStack item) {
             if (!item.hasItemMeta()) return 0;
             ItemMeta meta = item.getItemMeta();
             String pdc = meta.getPersistentDataContainer().get(TOPNOTE, PersistentDataType.STRING);
             return Integer.parseInt(Objects.requireNonNull(pdc));
         }
+
         public int page(ItemStack item) {
             if (!item.hasItemMeta()) return 0;
             ItemMeta meta = item.getItemMeta();
             String pdc = meta.getPersistentDataContainer().get(PAGE, PersistentDataType.STRING);
             return Integer.parseInt(Objects.requireNonNull(pdc));
         }
+
         public byte[] bytelist(ItemStack item) {
             if (!item.hasItemMeta()) {
                 ByteArrayManager byteArrayManager = new ByteArrayManager();
-                byte[] data =byteArrayManager.encode(new int[] {0});
+                byte[] data = byteArrayManager.encode(new int[]{0});
                 return data;
             }
             ItemMeta meta = item.getItemMeta();
             byte[] pdc = meta.getPersistentDataContainer().get(BYTELIST, PersistentDataType.BYTE_ARRAY);
             return pdc;
         }
+
         public String buttonId(ItemStack item) {
             if (!item.hasItemMeta()) return "";
             ItemMeta meta = item.getItemMeta();
             String pdc = meta.getPersistentDataContainer().get(BUTTONID, PersistentDataType.STRING);
             return pdc;
         }
+
         public int[] musicsavedbulue(ItemStack item) {
             if (!item.hasItemMeta()) return new int[0];
             ItemMeta meta = item.getItemMeta();
             int[] pdc = meta.getPersistentDataContainer().get(MUSICSAVESBULUE, PersistentDataType.INTEGER_ARRAY);
             return pdc;
-        }public int[] musicsavedred(ItemStack item) {
+        }
+
+        public int[] musicsavedred(ItemStack item) {
             if (!item.hasItemMeta()) return new int[0];
             ItemMeta meta = item.getItemMeta();
             int[] pdc = meta.getPersistentDataContainer().get(MUSICSAVESRED, PersistentDataType.INTEGER_ARRAY);
             return pdc;
-        }public int[] musicsavedyellow(ItemStack item) {
+        }
+
+        public int[] musicsavedyellow(ItemStack item) {
             if (!item.hasItemMeta()) return new int[0];
             ItemMeta meta = item.getItemMeta();
             int[] pdc = meta.getPersistentDataContainer().get(MUSICSAVESYELLOW, PersistentDataType.INTEGER_ARRAY);
@@ -73,13 +86,15 @@ public class PdcManager {
         }
 
     }
+
     public static class SetPdc {
         public ItemMeta addStr(ItemStack item, NamespacedKey key, String val) {
             ItemMeta meta = item.getItemMeta();
             meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, val);
             return meta;
         }
-        public ItemMeta addIntarray(ItemStack item,NamespacedKey key,int[] val) {
+
+        public ItemMeta addIntarray(ItemStack item, NamespacedKey key, int[] val) {
             ItemMeta meta = item.getItemMeta();
             meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER_ARRAY, val);
             return meta;

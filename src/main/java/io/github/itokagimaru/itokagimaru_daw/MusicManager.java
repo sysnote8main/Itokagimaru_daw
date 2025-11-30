@@ -6,30 +6,39 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class MusicManager {
     private Map<UUID, int[]> savedMusicList = Itokagimaru_daw.savedMusicList;
-    public void saveMusic(Player player , int[] music){
-        if (music.length != Itokagimaru_daw.MUSICLENGTH)music = Arrays.copyOf(music, Itokagimaru_daw.MUSICLENGTH);
-        Itokagimaru_daw.savedMusicList.put(player.getUniqueId(),music);
+
+    public void saveMusic(Player player, int[] music) {
+        if (music.length != Itokagimaru_daw.MUSICLENGTH) music = Arrays.copyOf(music, Itokagimaru_daw.MUSICLENGTH);
+        Itokagimaru_daw.savedMusicList.put(player.getUniqueId(), music);
     }
-    public int[] loadMusic(Player player){
-        if(!savedMusicList.containsKey(player.getUniqueId())){
+
+    public int[] loadMusic(Player player) {
+        if (!savedMusicList.containsKey(player.getUniqueId())) {
             int[] music = new int[Itokagimaru_daw.MUSICLENGTH];
             Arrays.fill(music, 0);
-            saveMusic(player,music);
+            saveMusic(player, music);
             return music;
         }
         return savedMusicList.get(player.getUniqueId()).clone();
     }
-    public Map<UUID, int[]> getSavedMusicList(){
+
+    public Map<UUID, int[]> getSavedMusicList() {
         return savedMusicList;
     }
-    public void setSavedMusicList(Map<UUID, int[]> music){
+
+    public void setSavedMusicList(Map<UUID, int[]> music) {
         Itokagimaru_daw.savedMusicList = music;
     }
-    public void makeMapFile(JavaPlugin plugin, Map<UUID,int[]> data) {
+
+    public void makeMapFile(JavaPlugin plugin, Map<UUID, int[]> data) {
         File file = new File(plugin.getDataFolder(), "music.yml");
         YamlConfiguration config = new YamlConfiguration();
         if (!plugin.getDataFolder().exists()) {
@@ -48,9 +57,10 @@ public class MusicManager {
             e.printStackTrace();
         }
     }
+
     public Map<UUID, int[]> loadMapFile(JavaPlugin plugin) {
         File file = new File(plugin.getDataFolder(), "music.yml");
-        Map<UUID,int[]> data = new HashMap<>();
+        Map<UUID, int[]> data = new HashMap<>();
         if (!file.exists()) {
             plugin.getLogger().warning("music save failed.");
             return data;
@@ -63,7 +73,7 @@ public class MusicManager {
                 List<Integer> music = config.getIntegerList(key);
                 int[] value = music.stream().mapToInt(Integer::intValue).toArray();
                 data.put(uuid, value);
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 plugin.getLogger().warning("UUIDの変換に失敗:" + key);
             }
         }

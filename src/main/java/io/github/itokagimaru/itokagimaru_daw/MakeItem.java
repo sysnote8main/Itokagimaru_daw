@@ -12,7 +12,7 @@ public class MakeItem {
         ItemMeta meta = itemstack.getItemMeta();
         if (name != null) {
             var nameComponent = Component.text(name);
-            if(nameColor != null) {
+            if (nameColor != null) {
                 nameComponent = nameComponent.color(TextColor.color(nameColor[0], nameColor[2], nameColor[3]));
             }
             meta.displayName(nameComponent);

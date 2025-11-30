@@ -13,12 +13,12 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public class GetCassetteTape implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
-        if(!(sender instanceof Player player)){
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage("Only players can execute this command");
             return false;
         }
-        
+
         ItemStack stack = new ItemStack(Material.WOODEN_HOE);
         stack.editMeta(meta -> {
             meta.customName(Component.text("カセットテープ"));

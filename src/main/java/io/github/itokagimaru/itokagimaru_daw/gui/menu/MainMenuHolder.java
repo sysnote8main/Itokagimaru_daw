@@ -16,20 +16,22 @@ public class MainMenuHolder extends BaseGuiHolder {
         this.inv = Bukkit.createInventory(this, 9, Component.text("MainMenu"));
         setup();
     }
-    public void setup(){
+
+    public void setup() {
         ItemStack writable = new ItemStack(Material.WRITABLE_BOOK);
         MakeItem makeItem = new MakeItem();
-        MakeItem.setItemMeta(writable,"§e打ち込みモード",null, null, PdcManager.BUTTONID,"INPUT MODE");
+        MakeItem.setItemMeta(writable, "§e打ち込みモード", null, null, PdcManager.BUTTONID, "INPUT MODE");
         this.inv.setItem(3, writable);
 
         ItemStack disc = new ItemStack(Material.MUSIC_DISC_13);
-        MakeItem.setItemMeta(disc,"§e再生モード",null, null, PdcManager.BUTTONID,"PLAY MODE");
+        MakeItem.setItemMeta(disc, "§e再生モード", null, null, PdcManager.BUTTONID, "PLAY MODE");
         this.inv.setItem(5, disc);
 
         ItemStack bar = new ItemStack(Material.BARRIER);
-        MakeItem.setItemMeta(bar,"§4しゅうりょう",null, null, PdcManager.BUTTONID,"CLOSE");
+        MakeItem.setItemMeta(bar, "§4しゅうりょう", null, null, PdcManager.BUTTONID, "CLOSE");
         this.inv.setItem(8, bar);
     }
+
     @Override
     public void onClick(InventoryClickEvent event) {
         Player clickedPlayer = (Player) event.getWhoClicked();
@@ -46,7 +48,9 @@ public class MainMenuHolder extends BaseGuiHolder {
             clickedPlayer.closeInventory();
         }
     }
+
     @Override
-    public void onClose(Player player) {}
+    public void onClose(Player player) {
+    }
 
 }

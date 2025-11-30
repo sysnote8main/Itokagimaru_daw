@@ -18,17 +18,17 @@ import java.util.Objects;
 @NullMarked
 public class SetCssttesName implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
-        if(!(sender instanceof Player player)){
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage("Only players can execute this command");
             return false;
         }
-        if(args.length != 1){
+        if (args.length != 1) {
             player.sendMessage(Component.text("引数に異常があります"));
             return false;
         }
         ItemStack item = player.getInventory().getItemInMainHand();
-        NamespacedKey data = new NamespacedKey("name","key");
+        NamespacedKey data = new NamespacedKey("name", "key");
         if (item.getType() == Material.AIR) {
             player.sendMessage(Component.text("メインハンドにカセットテープを持って実行してください"));
             return true;
@@ -39,22 +39,22 @@ public class SetCssttesName implements CommandExecutor {
             player.sendMessage(Component.text("メインハンドにカセットテープを持って実行してください"));
             return true;
         }
-        if(item.getItemMeta().getItemModel() != null) {
+        if (item.getItemMeta().getItemModel() != null) {
             data = item.getItemMeta().getItemModel();
         }
 
-        if(item.getType() == Material.WOODEN_HOE && Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))){
+        if (item.getType() == Material.WOODEN_HOE && Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))) {
             @Nullable List<Component> lore = meta.lore();
             int lines = (lore != null) ? lore.size() : 0;
-            if(lines == 2){
+            if (lines == 2) {
                 lore.addFirst(Component.text("\"" + args[0] + "\" was recorded in this"));
                 meta.lore(lore);
                 item.setItemMeta(meta);
                 return true;
-            }else if(lines == 3){
+            } else if (lines == 3) {
                 player.sendMessage(Component.text("もう設定されてるよ"));
                 return true;
-            }else{
+            } else {
                 player.sendMessage(Component.text("そのカセットテープ怪しいかも..."));
                 return true;
             }

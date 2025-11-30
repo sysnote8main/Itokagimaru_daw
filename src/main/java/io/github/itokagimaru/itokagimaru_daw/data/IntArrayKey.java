@@ -5,7 +5,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class IntArrayKey extends UsefulKey<int[]>{
+public class IntArrayKey extends UsefulKey<int[]> {
     public IntArrayKey(NamespacedKey key, int[] defaultValue) {
         super(key, PersistentDataType.INTEGER_ARRAY, defaultValue);
     }

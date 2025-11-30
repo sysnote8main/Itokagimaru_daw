@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class InventoryManager {
-    private final HashMap<UUID, ItemStack[]> inv= Itokagimaru_daw.inv;
-    public void saveInventory(Player player){
-        inv.put(player.getUniqueId(),player.getInventory().getContents().clone());
+    private final HashMap<UUID, ItemStack[]> inv = Itokagimaru_daw.inv;
+
+    public void saveInventory(Player player) {
+        inv.put(player.getUniqueId(), player.getInventory().getContents().clone());
     }
-    public void loadInventory(Player player){
-        if(!inv.containsKey(player.getUniqueId())){
+
+    public void loadInventory(Player player) {
+        if (!inv.containsKey(player.getUniqueId())) {
             return;
         }
         player.getInventory().setContents(inv.get(player.getUniqueId()).clone());

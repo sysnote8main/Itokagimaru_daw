@@ -10,27 +10,30 @@ import org.bukkit.scheduler.BukkitTask;
 public class PlayMusic {
     //HashMap<UUID, BukkitTask> tasks = new HashMap<>();
     BukkitTask task;
-    public void play_music (Player player,int[] lodedMusic, long interval){
+
+    public void play_music(Player player, int[] lodedMusic, long interval) {
         task = new BukkitRunnable() {
             int count = 0;
+
             @Override
             public void run() {
                 if (lodedMusic[count] == -1) {
                     ItemStack play = new ItemStack(Material.PAPER);
-                    MakeItem.setItemMeta(play,"再生",null, "next_b_right",PdcManager.BUTTONID,"PLAY");
-                    player.getOpenInventory().getTopInventory().setItem(4,play);
+                    MakeItem.setItemMeta(play, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
+                    player.getOpenInventory().getTopInventory().setItem(4, play);
                     cancel();
-                }else if(lodedMusic[count] != 0){
-                    PlaySound.playNote(player,lodedMusic[count]);
+                } else if (lodedMusic[count] != 0) {
+                    PlaySound.playNote(player, lodedMusic[count]);
 
                     ParticleManager particlemanager = new ParticleManager();
                     particlemanager.playNote(player);
                 }
                 count++;
             }
-        }.runTaskTimer(Itokagimaru_daw.getInstance(),0,(long) interval);
+        }.runTaskTimer(Itokagimaru_daw.getInstance(), 0, (long) interval);
     }
-    public void stop_task(){
+
+    public void stop_task() {
         task.cancel();
 
     }

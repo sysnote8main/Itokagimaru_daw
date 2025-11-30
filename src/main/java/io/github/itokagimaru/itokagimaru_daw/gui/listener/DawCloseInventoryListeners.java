@@ -11,11 +11,11 @@ public class DawCloseInventoryListeners implements Listener {
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
         // is player
-        if(!(e.getPlayer() instanceof Player player)) return;
+        if (!(e.getPlayer() instanceof Player player)) return;
 
         // get inventory and check
         Inventory inv = e.getInventory();
-        if(!(inv.getHolder() instanceof BaseGuiHolder guiHolder)) return;
+        if (!(inv.getHolder() instanceof BaseGuiHolder guiHolder)) return;
 
         // call onClose
         guiHolder.onClose(player);

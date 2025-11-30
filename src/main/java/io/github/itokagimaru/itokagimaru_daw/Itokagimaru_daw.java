@@ -24,26 +24,29 @@ import java.util.UUID;
 
 public final class Itokagimaru_daw extends JavaPlugin implements Listener {
     public static Itokagimaru_daw instance;
-    public static HashMap<UUID,PlayMusic> playing = new HashMap<>();
-    public static class operation_playing{
-        public void set_playing(Player player,PlayMusic play){
-            playing.put(player.getUniqueId(),play);
+    public static HashMap<UUID, PlayMusic> playing = new HashMap<>();
+
+    public static class operation_playing {
+        public void set_playing(Player player, PlayMusic play) {
+            playing.put(player.getUniqueId(), play);
         }
-        public PlayMusic get_playing(Player player){
+
+        public PlayMusic get_playing(Player player) {
             return playing.get(player.getUniqueId());
         }
     }
+
     public static Map<UUID, int[]> savedMusicList = new HashMap<>();
-    public static HashMap<UUID, ItemStack[]> inv= new HashMap<>();
+    public static HashMap<UUID, ItemStack[]> inv = new HashMap<>();
     public static int MUSICLENGTH = 2048;
-    public static int MAXPAGE = MUSICLENGTH/8;
+    public static int MAXPAGE = MUSICLENGTH / 8;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         MusicManager music = new MusicManager();
         music.setSavedMusicList(music.loadMapFile(this));
-        Bukkit.getPluginManager().registerEvents(this,this);
+        Bukkit.getPluginManager().registerEvents(this, this);
         registerListeners(
                 new DawClickInventoryListener(),
                 new DawItemUseListener(),
@@ -60,7 +63,7 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
 
     private void registerCommand(String name, CommandExecutor executor) {
         PluginCommand command = getCommand(name);
-        if(command == null) throw new RuntimeException(String.format("コマンド %s が見つかりませんでした。", name));
+        if (command == null) throw new RuntimeException(String.format("コマンド %s が見つかりませんでした。", name));
         command.setExecutor(executor);
     }
 
@@ -77,5 +80,7 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
         music.makeMapFile(this, music.getSavedMusicList());
     }
 
-    public static Itokagimaru_daw getInstance() {return instance;}
+    public static Itokagimaru_daw getInstance() {
+        return instance;
+    }
 }
