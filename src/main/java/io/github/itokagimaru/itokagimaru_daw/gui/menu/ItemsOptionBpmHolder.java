@@ -26,7 +26,6 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
         String buttonId = getPdc.buttonId(clicked);
         if (Objects.equals(buttonId, "SET BPM")) {
             int bpm = getPdc.bpm(clicked);
-            MakeItem makeItem = new MakeItem();
             ItemStack item = new ItemStack(Material.WOODEN_HOE);
             MakeItem.setItemMeta(item, "記録済みのカセットテープ", null, "cassette_tape", PdcManager.BPM, String.valueOf(bpm));
             PdcManager.SetPdc setPdc = new PdcManager.SetPdc();

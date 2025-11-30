@@ -23,7 +23,6 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
 
     public void setup(int bpm) {
         ItemStack clock = new ItemStack(Material.PAPER);
-        MakeItem makeItem = new MakeItem();
         MakeItem.setItemMeta(clock, "現在のBPM:" + bpm, null, "clock", PdcManager.BPM, String.valueOf(bpm));
         PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
         clock.setItemMeta(setPdc.addStr(clock, PdcManager.BUTTONID, "OPTION BPM"));
@@ -46,8 +45,7 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
             dawsOptionBpmHolder.updateBpmIcons(bpm);
             player.openInventory(dawsOptionBpmHolder.getInventory());
         } else if (Objects.equals(getPdc.buttonId(clicked), "PLAY")) {
-            double bpm = (double) getPdc.bpm(Objects.requireNonNull(clicked_inv.getItem(2)));
-            MakeItem makeItem = new MakeItem();
+            double bpm = getPdc.bpm(Objects.requireNonNull(clicked_inv.getItem(2)));
             MakeItem.setItemMeta(clicked, "再生停止", null, "elytra", PdcManager.BUTTONID, "STOP");
             Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
             PlayMusic play = new PlayMusic();
@@ -57,7 +55,6 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
         } else if (Objects.equals(getPdc.buttonId(clicked), "STOP")) {
             Itokagimaru_daw.operation_playing playing = new Itokagimaru_daw.operation_playing();
             PlayMusic play = playing.get_playing(player);
-            MakeItem makeItem = new MakeItem();
             MakeItem.setItemMeta(clicked, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
             play.stop_task();
         }

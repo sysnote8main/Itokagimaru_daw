@@ -16,7 +16,6 @@ public class SheetMusicManager {
         ByteArrayManager byteArrayManager = new ByteArrayManager();
         byte[] data = byteArrayManager.encode(musicList);
         ItemStack item = new ItemStack(Material.WOODEN_HOE);
-        MakeItem makeItem = new MakeItem();
         MakeItem.setItemMeta(item, "記述済みの楽譜", null, "written_sheet_music", null, null);
         ItemMeta meta = item.getItemMeta();
         PlaySound playSound = new PlaySound();

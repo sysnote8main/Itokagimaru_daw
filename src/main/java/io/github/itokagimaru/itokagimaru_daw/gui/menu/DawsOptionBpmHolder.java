@@ -20,7 +20,6 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
     public void setup() {
         ItemStack left = new ItemStack(Material.PAPER);
         ItemStack right = new ItemStack(Material.PAPER);
-        MakeItem makeItem = new MakeItem();
         MakeItem.setItemMeta(left, "", null, "next_b_left", PdcManager.BUTTONID, "SHIFT LEFT");
         MakeItem.setItemMeta(right, "", null, "next_b_right", PdcManager.BUTTONID, "SHIFT RIGHT");
         inv.setItem(0, left);
@@ -30,7 +29,6 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
     public void updateBpmIcons(int bpm) {
         int selectedBpm = getSelectBpmId(bpm);
         ItemStack green = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
-        MakeItem makeItem = new MakeItem();
         if (selectedBpm > bpmList.length - 7) selectedBpm = bpmList.length - 7;
         PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
         for (int i = 0; i < 7; i++) {

@@ -19,7 +19,6 @@ public class MainMenuHolder extends BaseGuiHolder {
 
     public void setup() {
         ItemStack writable = new ItemStack(Material.WRITABLE_BOOK);
-        MakeItem makeItem = new MakeItem();
         MakeItem.setItemMeta(writable, "§e打ち込みモード", null, null, PdcManager.BUTTONID, "INPUT MODE");
         this.inv.setItem(3, writable);
 
