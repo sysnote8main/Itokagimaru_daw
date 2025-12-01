@@ -18,8 +18,8 @@ public class ItemData {
     public static final IntKey BPM = new IntKey(getKey("bpm"), -1);
     public static final IntKey TOP_NOTE = new IntKey(getKey("topnote"), 0);
     public static final IntKey PAGE = new IntKey(getKey("page"), 0);
-    public static final ByteArrayKey BYTE_LIST = new ByteArrayKey(getKey("byte_list"), new byte[]{});
-    public static final StringKey BUTTON_ID = new StringKey(getKey("button_id"), "");
+    public static final ByteArrayKey BYTE_LIST = new ByteArrayKey(getKey("bytelist"), new byte[]{});
+    public static final StringKey BUTTON_ID = new StringKey(getKey("buttonid"), "");
 
     // Todo: implement these values as key
 //    public int[] musicsavedbulue(ItemStack item) {
