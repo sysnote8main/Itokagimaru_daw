@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 @NullMarked
-public class SetCssttesName implements CommandExecutor {
+public class SetCassetteName implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {

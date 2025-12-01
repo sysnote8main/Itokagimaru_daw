@@ -4,7 +4,7 @@ import io.github.itokagimaru.itokagimaru_daw.commands.GetCassetteTape;
 import io.github.itokagimaru.itokagimaru_daw.commands.GetDawItem;
 import io.github.itokagimaru.itokagimaru_daw.commands.GetPlayItem;
 import io.github.itokagimaru.itokagimaru_daw.commands.GetSheetMusicItem;
-import io.github.itokagimaru.itokagimaru_daw.commands.SetCssttesName;
+import io.github.itokagimaru.itokagimaru_daw.commands.SetCassetteName;
 import io.github.itokagimaru.itokagimaru_daw.gui.listener.DawClickInventoryListener;
 import io.github.itokagimaru.itokagimaru_daw.gui.listener.DawCloseInventoryListeners;
 import io.github.itokagimaru.itokagimaru_daw.listeners.DawItemUseListener;
@@ -51,7 +51,7 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
         registerCommand("getSheetMusic", new GetSheetMusicItem());
         registerCommand("getPlayItem", new GetPlayItem());
         registerCommand("getCassetteTape", new GetCassetteTape());
-        registerCommand("setCassettesName", new SetCssttesName());
+        registerCommand("setCassettesName", new SetCassetteName());
         getSLF4JLogger().info("コマンドを登録しました。");
 
         instance = this;
