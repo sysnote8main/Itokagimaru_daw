@@ -3,6 +3,7 @@ package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,15 +20,15 @@ public class MainMenuHolder extends BaseGuiHolder {
 
     public void setup() {
         ItemStack writable = new ItemStack(Material.WRITABLE_BOOK);
-        MakeItem.setItemMeta(writable, "§e打ち込みモード", null, null, PdcManager.BUTTONID, "INPUT MODE");
+        MakeItem.setItemMetaByColor(writable, "打ち込みモード", NamedTextColor.YELLOW, null, PdcManager.BUTTONID, "INPUT MODE");
         this.inv.setItem(3, writable);
 
         ItemStack disc = new ItemStack(Material.MUSIC_DISC_13);
-        MakeItem.setItemMeta(disc, "§e再生モード", null, null, PdcManager.BUTTONID, "PLAY MODE");
+        MakeItem.setItemMetaByColor(disc, "再生モード", NamedTextColor.YELLOW, null, PdcManager.BUTTONID, "PLAY MODE");
         this.inv.setItem(5, disc);
 
         ItemStack bar = new ItemStack(Material.BARRIER);
-        MakeItem.setItemMeta(bar, "§4しゅうりょう", null, null, PdcManager.BUTTONID, "CLOSE");
+        MakeItem.setItemMetaByColor(bar, "しゅうりょう", NamedTextColor.DARK_RED, null, PdcManager.BUTTONID, "CLOSE");
         this.inv.setItem(8, bar);
     }
 

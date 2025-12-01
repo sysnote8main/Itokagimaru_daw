@@ -6,6 +6,7 @@ import io.github.itokagimaru.itokagimaru_daw.manager.MusicManager;
 import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -66,7 +67,7 @@ public class InputModeHolder extends BaseGuiHolder {
         playerInventory.setItem(2, sign);
 
         ItemStack bar = new ItemStack(Material.BARRIER);
-        MakeItem.setItemMeta(bar, "§4しゅうりょう", null, null, PdcManager.BUTTONID, "CLOSE");
+        MakeItem.setItemMetaByColor(bar, "しゅうりょう", NamedTextColor.DARK_RED, null, PdcManager.BUTTONID, "CLOSE");
         playerInventory.setItem(8, bar);
 
         String[] whiteName = {"休符", "null", "ド/C", "レ/D", "ミ/E", "ファ/F", "ソ/G", "ラ/A", "シ/B"};
