@@ -14,7 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
     @Override
@@ -23,34 +22,38 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
         player.sendMessage("testes");
         ItemStack clicked = event.getCurrentItem();
         String buttonId = ItemData.BUTTON_ID.get(clicked);
-        if (Objects.equals(buttonId, "SET BPM")) {
-            int bpm = ItemData.BPM.get(clicked);
-            ItemStack item = new ItemStack(Material.WOODEN_HOE);
-            MakeItem.setItemMeta(item, "記録済みのカセットテープ", null, "cassette_tape", ItemData.BPM.key, String.valueOf(bpm));
-            ItemData.BUTTON_ID.set(item, "RECORD ITEM");
-            ItemMeta meta = item.getItemMeta();
-            MusicManager musicManager = new MusicManager();
-            int[] musicList = musicManager.loadMusic(player);
-            ByteArrayManager byteArrayManager = new ByteArrayManager();
-            byte[] data = byteArrayManager.encode(musicList);
-            meta.getPersistentDataContainer().set(ItemData.BYTE_LIST.key, PersistentDataType.BYTE_ARRAY, data);
-            meta.lore(List.of(Component.text("BPM:" + bpm), Component.text("recorded by " + player.getName())));
-            item.setItemMeta(meta);
-            FakeEnchant.addFakeEnchant(item);
-            player.getInventory().setItemInMainHand(item);
-            player.closeInventory();
-        } else if (Objects.equals(buttonId, "SHIFT RIGHT")) {
-            int selectBpmId = getSelectBpmId(ItemData.BPM.get(inv.getItem(1)));
-            selectBpmId += 1;
-            if (selectBpmId > bpmList.length - 7) selectBpmId = bpmList.length - 7;
-            int bpm = bpmList[selectBpmId];
-            updateBpmIcons(bpm);
-        } else if (Objects.equals(buttonId, "SHIFT LEFT")) {
-            int selectBpmId = getSelectBpmId(ItemData.BPM.get(inv.getItem(1)));
-            selectBpmId -= 1;
-            if (selectBpmId < 0) selectBpmId = 0;
-            int bpm = bpmList[selectBpmId];
-            updateBpmIcons(bpm);
+        switch (buttonId) {
+            case "SET BPM" -> {
+                int bpm = ItemData.BPM.get(clicked);
+                ItemStack item = new ItemStack(Material.WOODEN_HOE);
+                MakeItem.setItemMeta(item, "記録済みのカセットテープ", null, "cassette_tape", ItemData.BPM.key, String.valueOf(bpm));
+                ItemData.BUTTON_ID.set(item, "RECORD ITEM");
+                ItemMeta meta = item.getItemMeta();
+                MusicManager musicManager = new MusicManager();
+                int[] musicList = musicManager.loadMusic(player);
+                ByteArrayManager byteArrayManager = new ByteArrayManager();
+                byte[] data = byteArrayManager.encode(musicList);
+                meta.getPersistentDataContainer().set(ItemData.BYTE_LIST.key, PersistentDataType.BYTE_ARRAY, data);
+                meta.lore(List.of(Component.text("BPM:" + bpm), Component.text("recorded by " + player.getName())));
+                item.setItemMeta(meta);
+                FakeEnchant.addFakeEnchant(item);
+                player.getInventory().setItemInMainHand(item);
+                player.closeInventory();
+            }
+            case "SHIFT RIGHT" -> {
+                int selectBpmId = getSelectBpmId(ItemData.BPM.get(inv.getItem(1)));
+                selectBpmId += 1;
+                if (selectBpmId > bpmList.length - 7) selectBpmId = bpmList.length - 7;
+                int bpm = bpmList[selectBpmId];
+                updateBpmIcons(bpm);
+            }
+            case "SHIFT LEFT" -> {
+                int selectBpmId = getSelectBpmId(ItemData.BPM.get(inv.getItem(1)));
+                selectBpmId -= 1;
+                if (selectBpmId < 0) selectBpmId = 0;
+                int bpm = bpmList[selectBpmId];
+                updateBpmIcons(bpm);
+            }
         }
     }
 }

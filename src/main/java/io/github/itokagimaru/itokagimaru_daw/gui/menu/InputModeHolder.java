@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class InputModeHolder extends BaseGuiHolder {
-    Inventory playerInventory = Bukkit.createInventory(null, 36);
+    final Inventory playerInventory = Bukkit.createInventory(null, 36);
 
     public InputModeHolder() {
         this.inv = Bukkit.createInventory(this, 54, Component.text("InputMode"));
@@ -34,7 +34,7 @@ public class InputModeHolder extends BaseGuiHolder {
             this.inv.setItem(i, paper);
         }
         for (int i = 0; i <= 5; i++) {
-            MakeItem.setItemMeta(paper, "", null, "key_board_" + String.valueOf(i), null, null);
+            MakeItem.setItemMeta(paper, "", null, "key_board_" + i, null, null);
             this.inv.setItem(i * 9, paper);
         }
         ItemStack glay = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
@@ -119,9 +119,9 @@ public class InputModeHolder extends BaseGuiHolder {
             }
             for (int i = 0; i <= 5; i++) {
                 noteId = topNote + i;
-                paper.setAmount((int) (7 - (noteId + 2) / 6));
+                paper.setAmount(7 - (noteId + 2) / 6);
                 while (noteId >= 7) noteId -= 6;
-                MakeItem.setItemMeta(paper, String.valueOf(topNote) + "/" + noteId, null, "key_board_" + noteId, ItemData.TOP_NOTE.key, String.valueOf(topNote));
+                MakeItem.setItemMeta(paper, topNote + "/" + noteId, null, "key_board_" + noteId, ItemData.TOP_NOTE.key, String.valueOf(topNote));
                 this.inv.setItem(i * 9, paper);
             }
             paper.setAmount(1);
@@ -151,7 +151,7 @@ public class InputModeHolder extends BaseGuiHolder {
     public void jumpPage(int page, int topNote, Player player) {
         ItemStack pageItem = player.getInventory().getItem(2);
         if (page < 1 || page > Itokagimaru_daw.MAXPAGE) return;
-        MakeItem.setItemMeta(pageItem, "現在" + String.valueOf(page) + "ページ目", null, null, ItemData.PAGE.key, String.valueOf(page));
+        MakeItem.setItemMeta(pageItem, "現在" + page + "ページ目", null, null, ItemData.PAGE.key, String.valueOf(page));
         inputGuiUpdate(player, inv, topNote, page);
     }
 
@@ -179,8 +179,7 @@ public class InputModeHolder extends BaseGuiHolder {
         for (int i = 0; i < loded_music.length; i++) {//エンドポイントの削除
             if (loded_music[i] == -1) endPoint = i;
         }
-        int endPage = endPoint / 8 + 1;
-        return endPage;
+        return endPoint / 8 + 1;
     }
 
     @Override
@@ -204,7 +203,7 @@ public class InputModeHolder extends BaseGuiHolder {
             ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
             int topnote = ItemData.TOP_NOTE.get(topnote_item);
             int select = 1;
-            int add = 0;
+            int add;
             for (int i = 1; i <= 8; i++) {
                 ItemStack select_item = clicked_inv.getItem(i + 9);
                 if (Objects.equals(ItemData.BUTTON_ID.get(select_item), "SELECTED")) {
@@ -265,7 +264,7 @@ public class InputModeHolder extends BaseGuiHolder {
             int page = ItemData.PAGE.get(page_item);
             ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
             int topnote = ItemData.TOP_NOTE.get(topnote_item);
-            int add = 0;
+            int add;
             int select = 1;
             for (int i = 1; i <= 8; i++) {
                 ItemStack select_item = clicked_inv.getItem(i + 9);
@@ -409,7 +408,6 @@ public class InputModeHolder extends BaseGuiHolder {
             int topnote = ItemData.TOP_NOTE.get(topnote_item);
             inputGuiUpdate(player, event.getInventory(), topnote, tag_int);
         } else {
-            return;
         }
     }
 

@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class MusicManager {
-    private Map<UUID, int[]> savedMusicList = Itokagimaru_daw.savedMusicList;
+    private final Map<UUID, int[]> savedMusicList = Itokagimaru_daw.savedMusicList;
 
     public void saveMusic(Player player, int[] music) {
         if (music.length != Itokagimaru_daw.MUSICLENGTH) music = Arrays.copyOf(music, Itokagimaru_daw.MUSICLENGTH);

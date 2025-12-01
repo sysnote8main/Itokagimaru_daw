@@ -36,10 +36,8 @@ public class DawItemUseListener implements Listener {
                 MainMenuHolder mainMenuHolder = new MainMenuHolder();
                 player.openInventory(mainMenuHolder.getInventory());
             } else if (Objects.equals(data, NamespacedKey.minecraft("blank_sheet_music"))) {
-                SheetMusicManager sheetMusicManage = new SheetMusicManager();
-                item.setItemMeta(sheetMusicManage.makeSheetMusic(player));
+                item.setItemMeta(SheetMusicManager.makeSheetMusic(player));
             } else if (Objects.equals(data, NamespacedKey.minecraft("written_sheet_music"))) {
-                SheetMusicManager sheetMusicManage = new SheetMusicManager();
                 SheetMusicManager.loadSheetMusic(player, item);
             } else if (Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))) {
                 if (ItemData.BPM.get(item) != -1) return;

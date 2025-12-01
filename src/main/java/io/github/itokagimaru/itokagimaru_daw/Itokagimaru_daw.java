@@ -25,9 +25,9 @@ public final class Itokagimaru_daw extends JavaPlugin implements Listener {
     public static Itokagimaru_daw instance;
 
     public static Map<UUID, int[]> savedMusicList = new HashMap<>();
-    public static HashMap<UUID, ItemStack[]> inv = new HashMap<>();
-    public static int MUSICLENGTH = 2048;
-    public static int MAXPAGE = MUSICLENGTH / 8;
+    public static final HashMap<UUID, ItemStack[]> inv = new HashMap<>();
+    public static final int MUSICLENGTH = 2048;
+    public static final int MAXPAGE = MUSICLENGTH / 8;
 
     @Override
     public void onEnable() {

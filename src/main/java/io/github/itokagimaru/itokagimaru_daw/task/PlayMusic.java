@@ -35,7 +35,7 @@ public class PlayMusic {
                 }
                 count++;
             }
-        }.runTaskTimer(Itokagimaru_daw.getInstance(), 0, (long) interval);
+        }.runTaskTimer(Itokagimaru_daw.getInstance(), 0, interval);
     }
 
     public void stop_task() {

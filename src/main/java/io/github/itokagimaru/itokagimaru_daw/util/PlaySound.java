@@ -9,7 +9,7 @@ public class PlaySound {
         float pitch;
         soundId -= 2;//soundIdの正規化(諸事情で2からになってます
         pitch = 1;
-        player.getWorld().playSound(player.getLocation(), "soundid" + String.valueOf(soundId), SoundCategory.MASTER, 1.9f, pitch);
+        player.getWorld().playSound(player.getLocation(), "soundid" + soundId, SoundCategory.MASTER, 1.9f, pitch);
     }
 
     public void playPageTurn(Player player) {
