@@ -1,5 +1,6 @@
 package io.github.itokagimaru.itokagimaru_daw.manager;
 
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
 import io.github.itokagimaru.itokagimaru_daw.util.PlaySound;
 import net.kyori.adventure.text.Component;
@@ -22,15 +23,14 @@ public class SheetMusicManager {
         ItemMeta meta = item.getItemMeta();
         PlaySound playSound = new PlaySound();
         playSound.playPageTurn(player);
-        meta.getPersistentDataContainer().set(PdcManager.BYTELIST, PersistentDataType.BYTE_ARRAY, data);
+        meta.getPersistentDataContainer().set(ItemData.BYTE_LIST.key, PersistentDataType.BYTE_ARRAY, data);
         meta.lore(List.of(Component.text("written by " + player.getName())));
         return meta;
     }
 
     public void lodeSheetMusic(Player player, ItemStack item) {
         ByteArrayManager byteArrayManager = new ByteArrayManager();
-        PdcManager.GetPDC getPdc = new PdcManager.GetPDC();
-        int[] music = byteArrayManager.decode(getPdc.bytelist(item));
+        int[] music = byteArrayManager.decode(ItemData.BYTE_LIST.get(item));
         MusicManager musicManager = new MusicManager();
         musicManager.saveMusic(player, music);
         PlaySound playSound = new PlaySound();

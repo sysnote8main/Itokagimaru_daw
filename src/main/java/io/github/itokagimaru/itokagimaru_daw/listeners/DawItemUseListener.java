@@ -1,9 +1,9 @@
 package io.github.itokagimaru.itokagimaru_daw.listeners;
 
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import io.github.itokagimaru.itokagimaru_daw.gui.menu.ItemsOptionBpmHolder;
 import io.github.itokagimaru.itokagimaru_daw.gui.menu.ItemsPlayModeHolder;
 import io.github.itokagimaru.itokagimaru_daw.gui.menu.MainMenuHolder;
-import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
 import io.github.itokagimaru.itokagimaru_daw.manager.SheetMusicManager;
 import io.github.itokagimaru.itokagimaru_daw.util.SwapItems;
 import org.bukkit.Location;
@@ -23,7 +23,6 @@ public class DawItemUseListener implements Listener {
     public static void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
-        PdcManager.GetPDC getpdc = new PdcManager.GetPDC();
         if (!(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             return;
         }
@@ -43,7 +42,7 @@ public class DawItemUseListener implements Listener {
                 SheetMusicManager sheetMusicManage = new SheetMusicManager();
                 sheetMusicManage.lodeSheetMusic(player, item);
             } else if (Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))) {
-                if (getpdc.bpm(item) != -1) return;
+                if (ItemData.BPM.get(item) != -1) return;
                 ItemsOptionBpmHolder itemsOptionBpmHolder = new ItemsOptionBpmHolder();
                 itemsOptionBpmHolder.updateBpmIcons(60);
                 player.openInventory(itemsOptionBpmHolder.getInventory());

@@ -11,6 +11,7 @@ public class MakeItem {
     public static void setItemMeta(ItemStack itemstack, String name, int[] nameColor, String model, NamespacedKey key, String val) {
         setItemMetaByColor(itemstack, name, TextColor.color(nameColor[0], nameColor[2], nameColor[3]), model, key, val);
     }
+
     public static void setItemMetaByColor(ItemStack itemstack, String name, TextColor nameColor, String model, NamespacedKey key, String val) {
         ItemMeta meta = itemstack.getItemMeta();
         if (name != null) {

@@ -1,9 +1,9 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
 import io.github.itokagimaru.itokagimaru_daw.Itokagimaru_daw;
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import io.github.itokagimaru.itokagimaru_daw.manager.InventoryManager;
 import io.github.itokagimaru.itokagimaru_daw.manager.MusicManager;
-import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -42,39 +42,39 @@ public class InputModeHolder extends BaseGuiHolder {
         for (int i = 0; i < 36; i++) {
             playerInventory.setItem(i, glay);
         }
-        MakeItem.setItemMeta(paper, "選択中", null, "select", PdcManager.BUTTONID, "SELECTED");
+        MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
         playerInventory.setItem(10, paper);
         for (int i = 1; i <= 7; i++) {
-            MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", PdcManager.BUTTONID, "SELECT");
+            MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
             playerInventory.setItem(10 + i, paper);
         }
-        MakeItem.setItemMeta(paper, "1ページへ", null, "next_b_left", PdcManager.BUTTONID, "GO FIRST");
+        MakeItem.setItemMeta(paper, "1ページへ", null, "next_b_left", ItemData.BUTTON_ID.key, "GO FIRST");
         playerInventory.setItem(0, paper);
-        MakeItem.setItemMeta(paper, "前のページへ", null, "next_b_left", PdcManager.BUTTONID, "BACK PAGE");
+        MakeItem.setItemMeta(paper, "前のページへ", null, "next_b_left", ItemData.BUTTON_ID.key, "BACK PAGE");
         playerInventory.setItem(1, paper);
 
-        MakeItem.setItemMeta(paper, "次のページへ", null, "next_b_right", PdcManager.BUTTONID, "NEXT PAGE");
+        MakeItem.setItemMeta(paper, "次のページへ", null, "next_b_right", ItemData.BUTTON_ID.key, "NEXT PAGE");
         playerInventory.setItem(3, paper);
-        MakeItem.setItemMeta(paper, "最後ののページへ", null, "next_b_right", PdcManager.BUTTONID, "GO END");
+        MakeItem.setItemMeta(paper, "最後ののページへ", null, "next_b_right", ItemData.BUTTON_ID.key, "GO END");
         playerInventory.setItem(4, paper);
-        MakeItem.setItemMeta(paper, "上へスクロール", null, "next_b_up", PdcManager.BUTTONID, "UP NOTE");
+        MakeItem.setItemMeta(paper, "上へスクロール", null, "next_b_up", ItemData.BUTTON_ID.key, "UP NOTE");
         playerInventory.setItem(18, paper);
-        MakeItem.setItemMeta(paper, "下へスクロール", null, "next_b_down", PdcManager.BUTTONID, "DOWN NOTE");
+        MakeItem.setItemMeta(paper, "下へスクロール", null, "next_b_down", ItemData.BUTTON_ID.key, "DOWN NOTE");
         playerInventory.setItem(27, paper);
 
         ItemStack sign = new ItemStack(Material.OAK_HANGING_SIGN);
-        MakeItem.setItemMeta(sign, "現在1ページ目", null, null, PdcManager.PAGE, "1");
+        MakeItem.setItemMeta(sign, "現在1ページ目", null, null, ItemData.PAGE.key, "1");
         playerInventory.setItem(2, sign);
 
         ItemStack bar = new ItemStack(Material.BARRIER);
-        MakeItem.setItemMetaByColor(bar, "しゅうりょう", NamedTextColor.DARK_RED, null, PdcManager.BUTTONID, "CLOSE");
+        MakeItem.setItemMetaByColor(bar, "しゅうりょう", NamedTextColor.DARK_RED, null, ItemData.BUTTON_ID.key, "CLOSE");
         playerInventory.setItem(8, bar);
 
         String[] whiteName = {"休符", "null", "ド/C", "レ/D", "ミ/E", "ファ/F", "ソ/G", "ラ/A", "シ/B"};
         for (int i = 0; i < whiteName.length; i++) {
             if (!whiteName[i].equals("null")) {
                 ItemStack white = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
-                MakeItem.setItemMeta(white, whiteName[i], null, null, PdcManager.BUTTONID, whiteName[i]);
+                MakeItem.setItemMeta(white, whiteName[i], null, null, ItemData.BUTTON_ID.key, whiteName[i]);
                 playerInventory.setItem(i + 26, white);
             }
         }
@@ -83,13 +83,13 @@ public class InputModeHolder extends BaseGuiHolder {
         for (int i = 0; i < blackName.length; i++) {
             if (!blackName[i].equals("null")) {
                 ItemStack black = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
-                MakeItem.setItemMeta(black, blackName[i], null, null, PdcManager.BUTTONID, blackName[i]);
+                MakeItem.setItemMeta(black, blackName[i], null, null, ItemData.BUTTON_ID.key, blackName[i]);
                 playerInventory.setItem(i + 19, black);
             }
         }
 
         ItemStack structure = new ItemStack(Material.STRUCTURE_VOID);
-        MakeItem.setItemMeta(structure, "全削除", null, null, PdcManager.BUTTONID, "ALL DELETE");
+        MakeItem.setItemMeta(structure, "全削除", null, null, ItemData.BUTTON_ID.key, "ALL DELETE");
         playerInventory.setItem(6, structure);
     }
 
@@ -121,7 +121,7 @@ public class InputModeHolder extends BaseGuiHolder {
                 noteId = topNote + i;
                 paper.setAmount((int) (7 - (noteId + 2) / 6));
                 while (noteId >= 7) noteId -= 6;
-                MakeItem.setItemMeta(paper, String.valueOf(topNote) + "/" + String.valueOf(noteId), null, "key_board_" + String.valueOf(noteId), PdcManager.TOPNOTE, String.valueOf(topNote));
+                MakeItem.setItemMeta(paper, String.valueOf(topNote) + "/" + noteId, null, "key_board_" + noteId, ItemData.TOP_NOTE.key, String.valueOf(topNote));
                 this.inv.setItem(i * 9, paper);
             }
             paper.setAmount(1);
@@ -151,7 +151,7 @@ public class InputModeHolder extends BaseGuiHolder {
     public void jumpPage(int page, int topNote, Player player) {
         ItemStack pageItem = player.getInventory().getItem(2);
         if (page < 1 || page > Itokagimaru_daw.MAXPAGE) return;
-        MakeItem.setItemMeta(pageItem, "現在" + String.valueOf(page) + "ページ目", null, null, PdcManager.PAGE, String.valueOf(page));
+        MakeItem.setItemMeta(pageItem, "現在" + String.valueOf(page) + "ページ目", null, null, ItemData.PAGE.key, String.valueOf(page));
         inputGuiUpdate(player, inv, topNote, page);
     }
 
@@ -194,56 +194,55 @@ public class InputModeHolder extends BaseGuiHolder {
         ItemMeta meta = clicked.getItemMeta();
         Inventory clicked_inv = event.getClickedInventory();
         Inventory pl_inv = player.getInventory();
-        PdcManager.GetPDC getPdc = new PdcManager.GetPDC();
-        if (Objects.equals(getPdc.buttonId(clicked), "CLOSE")) {
+        if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "CLOSE")) {
             player.closeInventory();
         } else if (clicked.getType() == Material.WHITE_STAINED_GLASS_PANE) {
             MusicManager musicManager = new MusicManager();
             int[] lodedMusic = musicManager.loadMusic(player);
             ItemStack page_item = clicked_inv.getItem(2);
-            int page = getPdc.page(page_item);
+            int page = ItemData.PAGE.get(page_item);
             ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
-            int topnote = getPdc.topnote(topnote_item);
+            int topnote = ItemData.TOP_NOTE.get(topnote_item);
             int select = 1;
             int add = 0;
             for (int i = 1; i <= 8; i++) {
                 ItemStack select_item = clicked_inv.getItem(i + 9);
-                if (Objects.equals(getPdc.buttonId(select_item), "SELECTED")) {
+                if (Objects.equals(ItemData.BUTTON_ID.get(select_item), "SELECTED")) {
                     select = i;
                 }
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "ド/C")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "ド/C")) {
                 add = Math.min((topnote + 2) / 6, 5);
                 lodedMusic[(page - 1) * 8 + select - 1] = 8 + (12 * add);
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "レ/D")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "レ/D")) {
                 add = Math.min((topnote + 3) / 6, 5);
                 lodedMusic[(page - 1) * 8 + select - 1] = 6 + (12 * add);
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "ミ/E")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "ミ/E")) {
                 add = Math.min((topnote + 4) / 6, 5);
                 lodedMusic[(page - 1) * 8 + select - 1] = 4 + (12 * add);
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "ファ/F")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "ファ/F")) {
                 add = Math.min((topnote + 4) / 6, 5);
                 lodedMusic[(page - 1) * 8 + select - 1] = 3 + (12 * add);
 
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "ソ/G")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "ソ/G")) {
                 if (topnote != 0) {
                     add = Math.min((topnote - 1) / 6, 5);
                     lodedMusic[(page - 1) * 8 + select - 1] = 13 + add * 12;
                 }
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "ラ/A")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "ラ/A")) {
                 add = Math.min((topnote) / 6, 5);
                 lodedMusic[(page - 1) * 8 + select - 1] = 11 + (12 * add);
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "シ/B")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "シ/B")) {
                 add = Math.min((topnote + 1) / 6, 5);
                 lodedMusic[(page - 1) * 8 + select - 1] = 9 + (12 * add);
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "休符"))
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "休符"))
                 lodedMusic[(page - 1) * 8 + select - 1] = 0;
             //"ド/C","レ/D","ミ/E","ファ/F","ソ/G","ラ/A","シ/B"
 
@@ -252,20 +251,20 @@ public class InputModeHolder extends BaseGuiHolder {
             inputGuiUpdate(player, event.getInventory(), topnote, page);
 
             ItemStack update_select = new ItemStack(Material.PAPER);
-            MakeItem.setItemMeta(update_select, "カーソルを移動", null, "next_b_up", PdcManager.BUTTONID, "SELECT");
+            MakeItem.setItemMeta(update_select, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
             player.getInventory().setItem(select + 9, update_select);
 
             if (select >= 8) select = 0;
             select++;
-            MakeItem.setItemMeta(update_select, "選択中", null, "select", PdcManager.BUTTONID, "SELECTED");
+            MakeItem.setItemMeta(update_select, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
             player.getInventory().setItem(select + 9, update_select);
         } else if (clicked.getType() == Material.BLACK_STAINED_GLASS_PANE) {
             MusicManager musicManager = new MusicManager();
             int[] lodedmusic = musicManager.loadMusic(player);
             ItemStack page_item = clicked_inv.getItem(2);
-            int page = getPdc.page(page_item);
+            int page = ItemData.PAGE.get(page_item);
             ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
-            int topnote = getPdc.topnote(topnote_item);
+            int topnote = ItemData.TOP_NOTE.get(topnote_item);
             int add = 0;
             int select = 1;
             for (int i = 1; i <= 8; i++) {
@@ -274,126 +273,126 @@ public class InputModeHolder extends BaseGuiHolder {
                     select = i;
                 }
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "ド#/C#")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "ド#/C#")) {
                 add = Math.min((topnote + 2) / 6, 5);
                 lodedmusic[(page - 1) * 8 + select - 1] = 7 + (12 * add);
             }
 
-            if (Objects.equals(getPdc.buttonId(clicked), "レ#/D#")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "レ#/D#")) {
                 add = Math.min((topnote + 3) / 6, 5);
                 lodedmusic[(page - 1) * 8 + select - 1] = 5 + (12 * add);
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "ファ#/F#")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "ファ#/F#")) {
                 add = Math.min((topnote + 5) / 6, 6);
                 if (topnote == 0) add = 0;
 
                 lodedmusic[(page - 1) * 8 + select - 1] = 2 + (12 * add);
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "ソ#/G#")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "ソ#/G#")) {
                 add = Math.min((topnote) / 6, 5);
                 lodedmusic[(page - 1) * 8 + select - 1] = 12 + (12 * add);
 
             }
-            if (Objects.equals(getPdc.buttonId(clicked), "ラ#/A#")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "ラ#/A#")) {
                 add = Math.min((topnote + 1) / 6, 5);
                 lodedmusic[(page - 1) * 8 + select - 1] = 10 + (12 * add);
             }
             musicManager.saveMusic(player, lodedmusic.clone());
             inputGuiUpdate(player, event.getInventory(), topnote, page);
             ItemStack update_select = new ItemStack(Material.PAPER);
-            MakeItem.setItemMeta(update_select, "カーソルを移動", null, "next_b_up", PdcManager.BUTTONID, "SELECT");
+            MakeItem.setItemMeta(update_select, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
             player.getInventory().setItem(select + 9, update_select);
             if (select >= 8) select = 0;
             select++;
-            MakeItem.setItemMeta(update_select, "選択中", null, "select", PdcManager.BUTTONID, "SELECTED");
+            MakeItem.setItemMeta(update_select, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
             player.getInventory().setItem(select + 9, update_select);
 
 
         } else if (clicked.getType() == Material.PAPER) {
-            if (Objects.equals(getPdc.buttonId(clicked), "UP NOTE")) {
+            if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "UP NOTE")) {
 
                 ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
 
-                int topnote = getPdc.topnote(topnote_item);
+                int topnote = ItemData.TOP_NOTE.get(topnote_item);
 
                 ItemStack page_item = clicked_inv.getItem(2);
-                int tag_int = getPdc.page(page_item);
+                int tag_int = ItemData.PAGE.get(page_item);
                 if (topnote <= 0) topnote += 1;
                 inputGuiUpdate(player, event.getInventory(), topnote - 1, tag_int);
-            } else if (Objects.equals(getPdc.buttonId(clicked), "DOWN NOTE")) {
+            } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "DOWN NOTE")) {
                 ItemStack page_item = clicked_inv.getItem(2);
-                int tag_int = getPdc.page(page_item);
+                int tag_int = ItemData.PAGE.get(page_item);
 
                 ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
-                int topnote = getPdc.topnote(topnote_item);
+                int topnote = ItemData.TOP_NOTE.get(topnote_item);
                 if (topnote >= 31) topnote -= 1;
                 inputGuiUpdate(player, event.getInventory(), topnote + 1, tag_int);
 
-            } else if (Objects.equals(getPdc.buttonId(clicked), "SELECT")) {
-                MakeItem.setItemMeta(clicked, "選択中", null, "select", PdcManager.BUTTONID, "SELECTED");
+            } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "SELECT")) {
+                MakeItem.setItemMeta(clicked, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
                 ItemStack paper = new ItemStack(Material.PAPER);
                 int slot = event.getRawSlot() - 55;
                 for (int i = 0; i <= 7; i++) {
                     if (i != slot) {
-                        MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", PdcManager.BUTTONID, "SELECT");
+                        MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
                         player.getInventory().setItem(10 + i, paper);
                     }
                 }
-            } else if (Objects.equals(getPdc.buttonId(clicked), "NEXT PAGE")) {
+            } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "NEXT PAGE")) {
 
                 ItemStack page_item = Objects.requireNonNull(clicked_inv).getItem(2);
                 if (clicked_inv == pl_inv) {
                     ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
-                    int topnote = getPdc.topnote(topnote_item);
-                    int page = getPdc.page(Objects.requireNonNull(page_item));
+                    int topnote = ItemData.TOP_NOTE.get(topnote_item);
+                    int page = ItemData.PAGE.get(Objects.requireNonNull(page_item));
                     jumpPage(page + 1, topnote, player);
 
                     ItemStack paper = new ItemStack(Material.PAPER);
-                    MakeItem.setItemMeta(paper, "選択中", null, "select", PdcManager.BUTTONID, "SELECTED");
+                    MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
                     player.getInventory().setItem(10, paper);
                     for (int i = 1; i <= 7; i++) {
-                        MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", PdcManager.BUTTONID, "SELECT");
+                        MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
                         player.getInventory().setItem(10 + i, paper);
                     }
                 }
 
-            } else if (Objects.equals(getPdc.buttonId(clicked), "BACK PAGE")) {
+            } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "BACK PAGE")) {
 
                 ItemStack page_item = clicked_inv.getItem(2);
                 ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
-                int topnote = getPdc.topnote(topnote_item);
-                int page = getPdc.page(Objects.requireNonNull(page_item));
+                int topnote = ItemData.TOP_NOTE.get(topnote_item);
+                int page = ItemData.PAGE.get(Objects.requireNonNull(page_item));
                 jumpPage(page - 1, topnote, player);
                 ItemStack paper = new ItemStack(Material.PAPER);
-                MakeItem.setItemMeta(paper, "選択中", null, "select", PdcManager.BUTTONID, "SELECTED");
+                MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
                 player.getInventory().setItem(10, paper);
                 for (int i = 1; i <= 7; i++) {
-                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", PdcManager.BUTTONID, "SELECT");
+                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
                     player.getInventory().setItem(10 + i, paper);
                 }
 
-            } else if (Objects.equals(getPdc.buttonId(clicked), "GO FIRST")) {
+            } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "GO FIRST")) {
                 ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
-                int topnote = getPdc.topnote(topnote_item);
+                int topnote = ItemData.TOP_NOTE.get(topnote_item);
                 jumpPage(1, topnote, player);
                 ItemStack paper = new ItemStack(Material.PAPER);
-                MakeItem.setItemMeta(paper, "選択中", null, "select", PdcManager.BUTTONID, "SELECTED");
+                MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
                 player.getInventory().setItem(10, paper);
                 for (int i = 1; i <= 7; i++) {
-                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", PdcManager.BUTTONID, "SELECT");
+                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
                     player.getInventory().setItem(10 + i, paper);
                 }
-            } else if (Objects.equals(getPdc.buttonId(clicked), "GO END")) {
+            } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "GO END")) {
                 ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
-                int topnote = getPdc.topnote(topnote_item);
+                int topnote = ItemData.TOP_NOTE.get(topnote_item);
                 setMusicEndpoint(player);
                 int endPage = getMusicEndPage(player);
                 jumpPage(endPage, topnote, player);
                 ItemStack paper = new ItemStack(Material.PAPER);
-                MakeItem.setItemMeta(paper, "選択中", null, "select", PdcManager.BUTTONID, "SELECTED");
+                MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
                 player.getInventory().setItem(10, paper);
                 for (int i = 1; i <= 7; i++) {
-                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", PdcManager.BUTTONID, "SELECT");
+                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
                     player.getInventory().setItem(10 + i, paper);
                 }
             }
@@ -404,10 +403,10 @@ public class InputModeHolder extends BaseGuiHolder {
             musicManager.saveMusic(player, reset);
 
             ItemStack page_item = clicked_inv.getItem(2);
-            Integer tag_int = getPdc.page(page_item);
+            Integer tag_int = ItemData.PAGE.get(page_item);
 
             ItemStack topnote_item = player.getOpenInventory().getTopInventory().getItem(0);
-            int topnote = getPdc.topnote(topnote_item);
+            int topnote = ItemData.TOP_NOTE.get(topnote_item);
             inputGuiUpdate(player, event.getInventory(), topnote, tag_int);
         } else {
             return;

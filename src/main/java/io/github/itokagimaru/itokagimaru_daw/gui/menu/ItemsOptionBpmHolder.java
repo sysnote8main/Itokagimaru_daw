@@ -1,8 +1,8 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import io.github.itokagimaru.itokagimaru_daw.manager.ByteArrayManager;
 import io.github.itokagimaru.itokagimaru_daw.manager.MusicManager;
-import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
 import io.github.itokagimaru.itokagimaru_daw.util.FakeEnchant;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
 import net.kyori.adventure.text.Component;
@@ -22,33 +22,31 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
         Player player = (Player) event.getWhoClicked();
         player.sendMessage("testes");
         ItemStack clicked = event.getCurrentItem();
-        PdcManager.GetPDC getPdc = new PdcManager.GetPDC();
-        String buttonId = getPdc.buttonId(clicked);
+        String buttonId = ItemData.BUTTON_ID.get(clicked);
         if (Objects.equals(buttonId, "SET BPM")) {
-            int bpm = getPdc.bpm(clicked);
+            int bpm = ItemData.BPM.get(clicked);
             ItemStack item = new ItemStack(Material.WOODEN_HOE);
-            MakeItem.setItemMeta(item, "記録済みのカセットテープ", null, "cassette_tape", PdcManager.BPM, String.valueOf(bpm));
-            PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
-            item.setItemMeta(setPdc.addStr(item, PdcManager.BUTTONID, "RECORD ITEM"));
+            MakeItem.setItemMeta(item, "記録済みのカセットテープ", null, "cassette_tape", ItemData.BPM.key, String.valueOf(bpm));
+            ItemData.BUTTON_ID.set(item, "RECORD ITEM");
             ItemMeta meta = item.getItemMeta();
             MusicManager musicManager = new MusicManager();
             int[] musicList = musicManager.loadMusic(player);
             ByteArrayManager byteArrayManager = new ByteArrayManager();
             byte[] data = byteArrayManager.encode(musicList);
-            meta.getPersistentDataContainer().set(PdcManager.BYTELIST, PersistentDataType.BYTE_ARRAY, data);
+            meta.getPersistentDataContainer().set(ItemData.BYTE_LIST.key, PersistentDataType.BYTE_ARRAY, data);
             meta.lore(List.of(Component.text("BPM:" + bpm), Component.text("recorded by " + player.getName())));
             item.setItemMeta(meta);
             FakeEnchant.addFakeEnchant(item);
             player.getInventory().setItemInMainHand(item);
             player.closeInventory();
         } else if (Objects.equals(buttonId, "SHIFT RIGHT")) {
-            int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
+            int selectBpmId = getSelectBpmId(ItemData.BPM.get(inv.getItem(1)));
             selectBpmId += 1;
             if (selectBpmId > bpmList.length - 7) selectBpmId = bpmList.length - 7;
             int bpm = bpmList[selectBpmId];
             updateBpmIcons(bpm);
         } else if (Objects.equals(buttonId, "SHIFT LEFT")) {
-            int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
+            int selectBpmId = getSelectBpmId(ItemData.BPM.get(inv.getItem(1)));
             selectBpmId -= 1;
             if (selectBpmId < 0) selectBpmId = 0;
             int bpm = bpmList[selectBpmId];

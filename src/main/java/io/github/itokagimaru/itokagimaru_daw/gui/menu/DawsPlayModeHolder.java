@@ -1,7 +1,7 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import io.github.itokagimaru.itokagimaru_daw.manager.MusicManager;
-import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
 import io.github.itokagimaru.itokagimaru_daw.manager.PlayerMusicManager;
 import io.github.itokagimaru.itokagimaru_daw.task.PlayMusic;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
@@ -23,12 +23,11 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
 
     public void setup(int bpm) {
         ItemStack clock = new ItemStack(Material.PAPER);
-        MakeItem.setItemMeta(clock, "現在のBPM:" + bpm, null, "clock", PdcManager.BPM, String.valueOf(bpm));
-        PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
-        clock.setItemMeta(setPdc.addStr(clock, PdcManager.BUTTONID, "OPTION BPM"));
+        MakeItem.setItemMeta(clock, "現在のBPM:" + bpm, null, "clock", ItemData.BPM.key, String.valueOf(bpm));
+        ItemData.BUTTON_ID.set(clock, "OPTION BPM");
         inv.setItem(2, clock);
         ItemStack play = new ItemStack(Material.PAPER);
-        MakeItem.setItemMeta(play, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
+        MakeItem.setItemMeta(play, "再生", null, "next_b_right", ItemData.BUTTON_ID.key, "PLAY");
         inv.setItem(4, play);
     }
 
@@ -37,23 +36,22 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
         Player player = (Player) event.getWhoClicked();
         ItemStack clicked = event.getCurrentItem();
         Inventory clicked_inv = event.getClickedInventory();
-        PdcManager.GetPDC getPdc = new PdcManager.GetPDC();
-        if (Objects.equals(getPdc.buttonId(clicked), "OPTION BPM")) {
-            int bpm = getPdc.bpm(clicked);
+        if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "OPTION BPM")) {
+            int bpm = ItemData.BPM.get(clicked);
             player.closeInventory();
             DawsOptionBpmHolder dawsOptionBpmHolder = new DawsOptionBpmHolder();
             dawsOptionBpmHolder.updateBpmIcons(bpm);
             player.openInventory(dawsOptionBpmHolder.getInventory());
-        } else if (Objects.equals(getPdc.buttonId(clicked), "PLAY")) {
-            double bpm = getPdc.bpm(Objects.requireNonNull(clicked_inv.getItem(2)));
-            MakeItem.setItemMeta(clicked, "再生停止", null, "elytra", PdcManager.BUTTONID, "STOP");
+        } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "PLAY")) {
+            double bpm = ItemData.BPM.get(Objects.requireNonNull(clicked_inv.getItem(2)));
+            MakeItem.setItemMeta(clicked, "再生停止", null, "elytra", ItemData.BUTTON_ID.key, "STOP");
             PlayMusic play = new PlayMusic();
             PlayerMusicManager.setPlayingMusic(player, play);
             MusicManager music = new MusicManager();
             play.play_music(player, music.loadMusic(player), (long) (1200 / bpm));
-        } else if (Objects.equals(getPdc.buttonId(clicked), "STOP")) {
+        } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "STOP")) {
             PlayMusic play = PlayerMusicManager.getMusic(player);
-            MakeItem.setItemMeta(clicked, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
+            MakeItem.setItemMeta(clicked, "再生", null, "next_b_right", ItemData.BUTTON_ID.key, "PLAY");
             play.stop_task();
         }
     }

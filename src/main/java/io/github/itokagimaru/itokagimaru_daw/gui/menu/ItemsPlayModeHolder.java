@@ -1,7 +1,7 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import io.github.itokagimaru.itokagimaru_daw.manager.ByteArrayManager;
-import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
 import io.github.itokagimaru.itokagimaru_daw.manager.PlayerMusicManager;
 import io.github.itokagimaru.itokagimaru_daw.task.PlayMusic;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
@@ -25,7 +25,7 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
 
     public void setup() {
         ItemStack play = new ItemStack(Material.PAPER);
-        MakeItem.setItemMeta(play, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
+        MakeItem.setItemMeta(play, "再生", null, "next_b_right", ItemData.BUTTON_ID.key, "PLAY");
         inv.setItem(4, play);
         ItemStack bar = new ItemStack(Material.BARRIER);
         MakeItem.setItemMeta(bar, "未選択", null, null, null, null);
@@ -35,39 +35,37 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
     @Override
     public void onClick(InventoryClickEvent event) {
         ItemStack clickedItem = event.getCurrentItem();
-        PdcManager.GetPDC getPdc = new PdcManager.GetPDC();
-        PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
-        if (Objects.equals(getPdc.buttonId(clickedItem), "RECORD ITEM")) {
+        if (Objects.equals(ItemData.BUTTON_ID.get(clickedItem), "RECORD ITEM")) {
             ItemStack recordButton = clickedItem.clone();
-            recordButton.setItemMeta(setPdc.addStr(recordButton, PdcManager.BUTTONID, "RECORD BUTTON"));
+            ItemData.BUTTON_ID.set(recordButton, "RECORD BUTTON");
             inv.setItem(7, recordButton);
             ItemStack clock = new ItemStack(Material.CLOCK);
-            int bpm = getPdc.bpm(clickedItem);
+            int bpm = ItemData.BPM.get(clickedItem);
             MakeItem.setItemMeta(clock, "BPM", null, null, null, null);
             ItemMeta meta = clock.getItemMeta();
             meta.lore(List.of(Component.text("現在のBPM設定:" + bpm)));
             clock.setItemMeta(meta);
             inv.setItem(1, clock);
-        } else if (Objects.equals(getPdc.buttonId(clickedItem), "RECORD BUTTON")) {
+        } else if (Objects.equals(ItemData.BUTTON_ID.get(clickedItem), "RECORD BUTTON")) {
             ItemStack bar = new ItemStack(Material.BARRIER);
             MakeItem.setItemMeta(bar, "未選択", null, null, null, null);
             inv.setItem(7, bar);
             inv.setItem(1, null);
-        } else if (Objects.equals(getPdc.buttonId(clickedItem), "PLAY")) {
+        } else if (Objects.equals(ItemData.BUTTON_ID.get(clickedItem), "PLAY")) {
             Inventory clicked_inv = event.getClickedInventory();
-            double bpm = getPdc.bpm(Objects.requireNonNull(clicked_inv.getItem(7)));
+            double bpm = ItemData.BPM.get(Objects.requireNonNull(clicked_inv.getItem(7)));
             if (bpm == -1) return;
-            MakeItem.setItemMeta(clickedItem, "再生停止", null, "elytra", PdcManager.BUTTONID, "STOP");
+            MakeItem.setItemMeta(clickedItem, "再生停止", null, "elytra", ItemData.BUTTON_ID.key, "STOP");
             PlayMusic play = new PlayMusic();
             Player player = (Player) event.getWhoClicked();
             PlayerMusicManager.setPlayingMusic(player, play);
             ByteArrayManager byteArrayManager = new ByteArrayManager();
-            int[] music = byteArrayManager.decode(getPdc.bytelist(clicked_inv.getItem(7)));
+            int[] music = byteArrayManager.decode(ItemData.BYTE_LIST.get(clicked_inv.getItem(7)));
             play.play_music(player, music, (long) (1200 / bpm));
-        } else if (Objects.equals(getPdc.buttonId(clickedItem), "STOP")) {
+        } else if (Objects.equals(ItemData.BUTTON_ID.get(clickedItem), "STOP")) {
             Player player = (Player) event.getWhoClicked();
             PlayMusic play = PlayerMusicManager.getMusic(player);
-            MakeItem.setItemMeta(clickedItem, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
+            MakeItem.setItemMeta(clickedItem, "再生", null, "next_b_right", ItemData.BUTTON_ID.key, "PLAY");
             play.stop_task();
         }
     }

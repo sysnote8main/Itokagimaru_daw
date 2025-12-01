@@ -1,6 +1,6 @@
 package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 
-import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -20,8 +20,8 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
     public void setup() {
         ItemStack left = new ItemStack(Material.PAPER);
         ItemStack right = new ItemStack(Material.PAPER);
-        MakeItem.setItemMeta(left, "", null, "next_b_left", PdcManager.BUTTONID, "SHIFT LEFT");
-        MakeItem.setItemMeta(right, "", null, "next_b_right", PdcManager.BUTTONID, "SHIFT RIGHT");
+        MakeItem.setItemMeta(left, "", null, "next_b_left", ItemData.BUTTON_ID.key, "SHIFT LEFT");
+        MakeItem.setItemMeta(right, "", null, "next_b_right", ItemData.BUTTON_ID.key, "SHIFT RIGHT");
         inv.setItem(0, left);
         inv.setItem(8, right);
     }
@@ -30,10 +30,9 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
         int selectedBpm = getSelectBpmId(bpm);
         ItemStack green = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         if (selectedBpm > bpmList.length - 7) selectedBpm = bpmList.length - 7;
-        PdcManager.SetPdc setPdc = new PdcManager.SetPdc();
         for (int i = 0; i < 7; i++) {
-            MakeItem.setItemMeta(green, "set:" + bpmList[selectedBpm + i], null, null, PdcManager.BPM, String.valueOf(bpmList[selectedBpm + i]));
-            green.setItemMeta(setPdc.addStr(green, PdcManager.BUTTONID, "SET BPM"));
+            MakeItem.setItemMeta(green, "set:" + bpmList[selectedBpm + i], null, null, ItemData.BPM.key, String.valueOf(bpmList[selectedBpm + i]));
+            ItemData.BUTTON_ID.set(green, "SET BPM");
             inv.setItem(i + 1, green);
         }
     }
@@ -54,24 +53,22 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
         ItemStack clicked = event.getCurrentItem();
         if (clicked == null) return;
 
-        PdcManager.GetPDC getPdc = new PdcManager.GetPDC();
-
-        String buttonId = getPdc.buttonId(clicked);
+        String buttonId = ItemData.BUTTON_ID.get(clicked);
         switch (buttonId) {
             case "SET BPM" -> {
-                int bpm = getPdc.bpm(clicked);
+                int bpm = ItemData.BPM.get(clicked);
                 DawsPlayModeHolder dawsPlayModeHolder = new DawsPlayModeHolder(bpm);
                 player.openInventory(dawsPlayModeHolder.getInventory());
             }
             case "SHIFT RIGHT" -> {
-                int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
+                int selectBpmId = getSelectBpmId(ItemData.BPM.get(inv.getItem(1)));
                 selectBpmId += 1;
                 if (selectBpmId > bpmList.length - 7) selectBpmId = bpmList.length - 7;
                 int bpm = bpmList[selectBpmId];
                 updateBpmIcons(bpm);
             }
             case "SHIFT LEFT" -> {
-                int selectBpmId = getSelectBpmId(getPdc.bpm(inv.getItem(1)));
+                int selectBpmId = getSelectBpmId(ItemData.BPM.get(inv.getItem(1)));
                 selectBpmId -= 1;
                 if (selectBpmId < 0) selectBpmId = 0;
                 int bpm = bpmList[selectBpmId];

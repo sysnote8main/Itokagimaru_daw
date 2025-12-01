@@ -1,8 +1,8 @@
 package io.github.itokagimaru.itokagimaru_daw.task;
 
 import io.github.itokagimaru.itokagimaru_daw.Itokagimaru_daw;
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import io.github.itokagimaru.itokagimaru_daw.manager.ParticleManager;
-import io.github.itokagimaru.itokagimaru_daw.manager.PdcManager;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
 import io.github.itokagimaru.itokagimaru_daw.util.PlaySound;
 import org.bukkit.Material;
@@ -24,7 +24,7 @@ public class PlayMusic {
             public void run() {
                 if (lodedMusic[count] == -1) {
                     ItemStack play = new ItemStack(Material.PAPER);
-                    MakeItem.setItemMeta(play, "再生", null, "next_b_right", PdcManager.BUTTONID, "PLAY");
+                    MakeItem.setItemMeta(play, "再生", null, "next_b_right", ItemData.BUTTON_ID.key, "PLAY");
                     player.getOpenInventory().getTopInventory().setItem(4, play);
                     cancel();
                 } else if (lodedMusic[count] != 0) {
