@@ -8,21 +8,22 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @NullMarked
 public abstract class UsefulKey<C> {
     public final NamespacedKey key;
     public final PersistentDataType<?, C> dataType;
-    public final C defaultValue;
+    public final Supplier<C> defaultValue;
 
-    public UsefulKey(NamespacedKey key, PersistentDataType<?, C> dataType, C defaultValue) {
+    public UsefulKey(NamespacedKey key, PersistentDataType<?, C> dataType, Supplier<C> defaultValue) {
         this.key = key;
         this.dataType = dataType;
         this.defaultValue = defaultValue;
     }
 
     public C get(PersistentDataContainerView dataContainerView) {
-        return dataContainerView.getOrDefault(this.key, this.dataType, this.defaultValue);
+        return dataContainerView.getOrDefault(this.key, this.dataType, this.defaultValue.get());
     }
 
     public C get(ItemStack stack) {

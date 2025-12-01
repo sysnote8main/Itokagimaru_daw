@@ -15,27 +15,14 @@ public class ItemData {
         return new NamespacedKey(NAMESPACE, key);
     }
 
-    public static final IntKey BPM = new IntKey(getKey("bpm"), -1);
-    public static final IntKey TOP_NOTE = new IntKey(getKey("topnote"), 0);
-    public static final IntKey PAGE = new IntKey(getKey("page"), 0);
-    public static final ByteArrayKey BYTE_LIST = new ByteArrayKey(getKey("bytelist"), new byte[]{});
-    public static final StringKey BUTTON_ID = new StringKey(getKey("buttonid"), "");
+    public static final IntKey BPM = new IntKey(getKey("bpm"), () -> -1);
+    public static final IntKey TOP_NOTE = new IntKey(getKey("topnote"), () -> 0);
+    public static final IntKey PAGE = new IntKey(getKey("page"), () -> 0);
+    public static final ByteArrayKey BYTE_LIST = new ByteArrayKey(getKey("bytelist"), () -> new byte[]{});
+    public static final StringKey BUTTON_ID = new StringKey(getKey("buttonid"), () -> "");
 
-    // Todo: implement these values as key
-//    public int[] musicsavedbulue(ItemStack item) {
-//        if (!item.hasItemMeta()) return new int[0];
-//        ItemMeta meta = item.getItemMeta();
-//        int[] pdc = meta.getPersistentDataContainer().get(MUSICSAVESBULUE, PersistentDataType.INTEGER_ARRAY);
-//        return pdc;
-//    }public int[] musicsavedred(ItemStack item) {
-//        if (!item.hasItemMeta()) return new int[0];
-//        ItemMeta meta = item.getItemMeta();
-//        int[] pdc = meta.getPersistentDataContainer().get(MUSICSAVESRED, PersistentDataType.INTEGER_ARRAY);
-//        return pdc;
-//    }public int[] musicsavedyellow(ItemStack item) {
-//        if (!item.hasItemMeta()) return new int[0];
-//        ItemMeta meta = item.getItemMeta();
-//        int[] pdc = meta.getPersistentDataContainer().get(MUSICSAVESYELLOW, PersistentDataType.INTEGER_ARRAY);
-//        return pdc;
-//    }
+    // 将来のために変数だけ用意
+//    public static final IntArrayKey MUSIC_SAVED_BLUE = new IntArrayKey(getKey("music_saved_blue"), () -> new int[0]);
+//    public static final IntArrayKey MUSIC_SAVED_RED = new IntArrayKey(getKey("music_saved_blue"), () -> new int[0]);
+//    public static final IntArrayKey MUSIC_SAVED_YELLOW = new IntArrayKey(getKey("music_saved_blue"), () -> new int[0]);
 }
