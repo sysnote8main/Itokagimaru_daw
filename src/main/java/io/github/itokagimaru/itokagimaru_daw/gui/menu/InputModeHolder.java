@@ -42,39 +42,39 @@ public class InputModeHolder extends BaseGuiHolder {
         for (int i = 0; i < 36; i++) {
             playerInventory.setItem(i, glay);
         }
-        MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
+        MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID, "SELECTED");
         playerInventory.setItem(10, paper);
         for (int i = 1; i <= 7; i++) {
-            MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
+            MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID, "SELECT");
             playerInventory.setItem(10 + i, paper);
         }
-        MakeItem.setItemMeta(paper, "1ページへ", null, "next_b_left", ItemData.BUTTON_ID.key, "GO FIRST");
+        MakeItem.setItemMeta(paper, "1ページへ", null, "next_b_left", ItemData.BUTTON_ID, "GO FIRST");
         playerInventory.setItem(0, paper);
-        MakeItem.setItemMeta(paper, "前のページへ", null, "next_b_left", ItemData.BUTTON_ID.key, "BACK PAGE");
+        MakeItem.setItemMeta(paper, "前のページへ", null, "next_b_left", ItemData.BUTTON_ID, "BACK PAGE");
         playerInventory.setItem(1, paper);
 
-        MakeItem.setItemMeta(paper, "次のページへ", null, "next_b_right", ItemData.BUTTON_ID.key, "NEXT PAGE");
+        MakeItem.setItemMeta(paper, "次のページへ", null, "next_b_right", ItemData.BUTTON_ID, "NEXT PAGE");
         playerInventory.setItem(3, paper);
-        MakeItem.setItemMeta(paper, "最後ののページへ", null, "next_b_right", ItemData.BUTTON_ID.key, "GO END");
+        MakeItem.setItemMeta(paper, "最後ののページへ", null, "next_b_right", ItemData.BUTTON_ID, "GO END");
         playerInventory.setItem(4, paper);
-        MakeItem.setItemMeta(paper, "上へスクロール", null, "next_b_up", ItemData.BUTTON_ID.key, "UP NOTE");
+        MakeItem.setItemMeta(paper, "上へスクロール", null, "next_b_up", ItemData.BUTTON_ID, "UP NOTE");
         playerInventory.setItem(18, paper);
-        MakeItem.setItemMeta(paper, "下へスクロール", null, "next_b_down", ItemData.BUTTON_ID.key, "DOWN NOTE");
+        MakeItem.setItemMeta(paper, "下へスクロール", null, "next_b_down", ItemData.BUTTON_ID, "DOWN NOTE");
         playerInventory.setItem(27, paper);
 
         ItemStack sign = new ItemStack(Material.OAK_HANGING_SIGN);
-        MakeItem.setItemMeta(sign, "現在1ページ目", null, null, ItemData.PAGE.key, "1");
+        MakeItem.setItemMeta(sign, "現在1ページ目", null, null, ItemData.PAGE, 1);
         playerInventory.setItem(2, sign);
 
         ItemStack bar = new ItemStack(Material.BARRIER);
-        MakeItem.setItemMetaByColor(bar, "しゅうりょう", NamedTextColor.DARK_RED, null, ItemData.BUTTON_ID.key, "CLOSE");
+        MakeItem.setItemMetaByColor(bar, "しゅうりょう", NamedTextColor.DARK_RED, null, ItemData.BUTTON_ID, "CLOSE");
         playerInventory.setItem(8, bar);
 
         String[] whiteName = {"休符", "null", "ド/C", "レ/D", "ミ/E", "ファ/F", "ソ/G", "ラ/A", "シ/B"};
         for (int i = 0; i < whiteName.length; i++) {
             if (!whiteName[i].equals("null")) {
                 ItemStack white = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
-                MakeItem.setItemMeta(white, whiteName[i], null, null, ItemData.BUTTON_ID.key, whiteName[i]);
+                MakeItem.setItemMeta(white, whiteName[i], null, null, ItemData.BUTTON_ID, whiteName[i]);
                 playerInventory.setItem(i + 26, white);
             }
         }
@@ -83,13 +83,13 @@ public class InputModeHolder extends BaseGuiHolder {
         for (int i = 0; i < blackName.length; i++) {
             if (!blackName[i].equals("null")) {
                 ItemStack black = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
-                MakeItem.setItemMeta(black, blackName[i], null, null, ItemData.BUTTON_ID.key, blackName[i]);
+                MakeItem.setItemMeta(black, blackName[i], null, null, ItemData.BUTTON_ID, blackName[i]);
                 playerInventory.setItem(i + 19, black);
             }
         }
 
         ItemStack structure = new ItemStack(Material.STRUCTURE_VOID);
-        MakeItem.setItemMeta(structure, "全削除", null, null, ItemData.BUTTON_ID.key, "ALL DELETE");
+        MakeItem.setItemMeta(structure, "全削除", null, null, ItemData.BUTTON_ID, "ALL DELETE");
         playerInventory.setItem(6, structure);
     }
 
@@ -121,7 +121,7 @@ public class InputModeHolder extends BaseGuiHolder {
                 noteId = topNote + i;
                 paper.setAmount(7 - (noteId + 2) / 6);
                 while (noteId >= 7) noteId -= 6;
-                MakeItem.setItemMeta(paper, topNote + "/" + noteId, null, "key_board_" + noteId, ItemData.TOP_NOTE.key, String.valueOf(topNote));
+                MakeItem.setItemMeta(paper, topNote + "/" + noteId, null, "key_board_" + noteId, ItemData.TOP_NOTE, topNote);
                 this.inv.setItem(i * 9, paper);
             }
             paper.setAmount(1);
@@ -151,7 +151,7 @@ public class InputModeHolder extends BaseGuiHolder {
     public void jumpPage(int page, int topNote, Player player) {
         ItemStack pageItem = player.getInventory().getItem(2);
         if (page < 1 || page > Itokagimaru_daw.MAXPAGE) return;
-        MakeItem.setItemMeta(pageItem, "現在" + page + "ページ目", null, null, ItemData.PAGE.key, String.valueOf(page));
+        MakeItem.setItemMeta(pageItem, "現在" + page + "ページ目", null, null, ItemData.PAGE, page);
         inputGuiUpdate(player, inv, topNote, page);
     }
 
@@ -250,12 +250,12 @@ public class InputModeHolder extends BaseGuiHolder {
             inputGuiUpdate(player, event.getInventory(), topnote, page);
 
             ItemStack update_select = new ItemStack(Material.PAPER);
-            MakeItem.setItemMeta(update_select, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
+            MakeItem.setItemMeta(update_select, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID, "SELECT");
             player.getInventory().setItem(select + 9, update_select);
 
             if (select >= 8) select = 0;
             select++;
-            MakeItem.setItemMeta(update_select, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
+            MakeItem.setItemMeta(update_select, "選択中", null, "select", ItemData.BUTTON_ID, "SELECTED");
             player.getInventory().setItem(select + 9, update_select);
         } else if (clicked.getType() == Material.BLACK_STAINED_GLASS_PANE) {
             MusicManager musicManager = new MusicManager();
@@ -299,11 +299,11 @@ public class InputModeHolder extends BaseGuiHolder {
             musicManager.saveMusic(player, lodedmusic.clone());
             inputGuiUpdate(player, event.getInventory(), topnote, page);
             ItemStack update_select = new ItemStack(Material.PAPER);
-            MakeItem.setItemMeta(update_select, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
+            MakeItem.setItemMeta(update_select, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID, "SELECT");
             player.getInventory().setItem(select + 9, update_select);
             if (select >= 8) select = 0;
             select++;
-            MakeItem.setItemMeta(update_select, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
+            MakeItem.setItemMeta(update_select, "選択中", null, "select", ItemData.BUTTON_ID, "SELECTED");
             player.getInventory().setItem(select + 9, update_select);
 
 
@@ -328,12 +328,12 @@ public class InputModeHolder extends BaseGuiHolder {
                 inputGuiUpdate(player, event.getInventory(), topnote + 1, tag_int);
 
             } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "SELECT")) {
-                MakeItem.setItemMeta(clicked, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
+                MakeItem.setItemMeta(clicked, "選択中", null, "select", ItemData.BUTTON_ID, "SELECTED");
                 ItemStack paper = new ItemStack(Material.PAPER);
                 int slot = event.getRawSlot() - 55;
                 for (int i = 0; i <= 7; i++) {
                     if (i != slot) {
-                        MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
+                        MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID, "SELECT");
                         player.getInventory().setItem(10 + i, paper);
                     }
                 }
@@ -347,10 +347,10 @@ public class InputModeHolder extends BaseGuiHolder {
                     jumpPage(page + 1, topnote, player);
 
                     ItemStack paper = new ItemStack(Material.PAPER);
-                    MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
+                    MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID, "SELECTED");
                     player.getInventory().setItem(10, paper);
                     for (int i = 1; i <= 7; i++) {
-                        MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
+                        MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID, "SELECT");
                         player.getInventory().setItem(10 + i, paper);
                     }
                 }
@@ -363,10 +363,10 @@ public class InputModeHolder extends BaseGuiHolder {
                 int page = ItemData.PAGE.get(Objects.requireNonNull(page_item));
                 jumpPage(page - 1, topnote, player);
                 ItemStack paper = new ItemStack(Material.PAPER);
-                MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
+                MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID, "SELECTED");
                 player.getInventory().setItem(10, paper);
                 for (int i = 1; i <= 7; i++) {
-                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
+                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID, "SELECT");
                     player.getInventory().setItem(10 + i, paper);
                 }
 
@@ -375,10 +375,10 @@ public class InputModeHolder extends BaseGuiHolder {
                 int topnote = ItemData.TOP_NOTE.get(topnote_item);
                 jumpPage(1, topnote, player);
                 ItemStack paper = new ItemStack(Material.PAPER);
-                MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
+                MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID, "SELECTED");
                 player.getInventory().setItem(10, paper);
                 for (int i = 1; i <= 7; i++) {
-                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
+                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID, "SELECT");
                     player.getInventory().setItem(10 + i, paper);
                 }
             } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "GO END")) {
@@ -388,10 +388,10 @@ public class InputModeHolder extends BaseGuiHolder {
                 int endPage = getMusicEndPage(player);
                 jumpPage(endPage, topnote, player);
                 ItemStack paper = new ItemStack(Material.PAPER);
-                MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID.key, "SELECTED");
+                MakeItem.setItemMeta(paper, "選択中", null, "select", ItemData.BUTTON_ID, "SELECTED");
                 player.getInventory().setItem(10, paper);
                 for (int i = 1; i <= 7; i++) {
-                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID.key, "SELECT");
+                    MakeItem.setItemMeta(paper, "カーソルを移動", null, "next_b_up", ItemData.BUTTON_ID, "SELECT");
                     player.getInventory().setItem(10 + i, paper);
                 }
             }

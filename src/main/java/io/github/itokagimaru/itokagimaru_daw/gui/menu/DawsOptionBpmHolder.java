@@ -20,8 +20,8 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
     public void setup() {
         ItemStack left = new ItemStack(Material.PAPER);
         ItemStack right = new ItemStack(Material.PAPER);
-        MakeItem.setItemMeta(left, "", null, "next_b_left", ItemData.BUTTON_ID.key, "SHIFT LEFT");
-        MakeItem.setItemMeta(right, "", null, "next_b_right", ItemData.BUTTON_ID.key, "SHIFT RIGHT");
+        MakeItem.setItemMeta(left, "", null, "next_b_left", ItemData.BUTTON_ID, "SHIFT LEFT");
+        MakeItem.setItemMeta(right, "", null, "next_b_right", ItemData.BUTTON_ID, "SHIFT RIGHT");
         inv.setItem(0, left);
         inv.setItem(8, right);
     }
@@ -31,7 +31,7 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
         ItemStack green = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         if (selectedBpm > bpmList.length - 7) selectedBpm = bpmList.length - 7;
         for (int i = 0; i < 7; i++) {
-            MakeItem.setItemMeta(green, "set:" + bpmList[selectedBpm + i], null, null, ItemData.BPM.key, String.valueOf(bpmList[selectedBpm + i]));
+            MakeItem.setItemMeta(green, "set:" + bpmList[selectedBpm + i], null, null, ItemData.BPM, bpmList[selectedBpm + i]);
             ItemData.BUTTON_ID.set(green, "SET BPM");
             inv.setItem(i + 1, green);
         }

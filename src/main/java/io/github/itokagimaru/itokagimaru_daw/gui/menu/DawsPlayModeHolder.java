@@ -23,11 +23,11 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
 
     public void setup(int bpm) {
         ItemStack clock = new ItemStack(Material.PAPER);
-        MakeItem.setItemMeta(clock, "現在のBPM:" + bpm, null, "clock", ItemData.BPM.key, String.valueOf(bpm));
+        MakeItem.setItemMeta(clock, "現在のBPM:" + bpm, null, "clock", ItemData.BPM, bpm);
         ItemData.BUTTON_ID.set(clock, "OPTION BPM");
         inv.setItem(2, clock);
         ItemStack play = new ItemStack(Material.PAPER);
-        MakeItem.setItemMeta(play, "再生", null, "next_b_right", ItemData.BUTTON_ID.key, "PLAY");
+        MakeItem.setItemMeta(play, "再生", null, "next_b_right", ItemData.BUTTON_ID, "PLAY");
         inv.setItem(4, play);
     }
 
@@ -44,14 +44,14 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
             player.openInventory(dawsOptionBpmHolder.getInventory());
         } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "PLAY")) {
             double bpm = ItemData.BPM.get(Objects.requireNonNull(clicked_inv.getItem(2)));
-            MakeItem.setItemMeta(clicked, "再生停止", null, "elytra", ItemData.BUTTON_ID.key, "STOP");
+            MakeItem.setItemMeta(clicked, "再生停止", null, "elytra", ItemData.BUTTON_ID, "STOP");
             PlayMusic play = new PlayMusic();
             PlayerMusicManager.setPlayingMusic(player, play);
             MusicManager music = new MusicManager();
             play.play_music(player, music.loadMusic(player), (long) (1200 / bpm));
         } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "STOP")) {
             PlayMusic play = PlayerMusicManager.getMusic(player);
-            MakeItem.setItemMeta(clicked, "再生", null, "next_b_right", ItemData.BUTTON_ID.key, "PLAY");
+            MakeItem.setItemMeta(clicked, "再生", null, "next_b_right", ItemData.BUTTON_ID, "PLAY");
             play.stop_task();
         }
     }

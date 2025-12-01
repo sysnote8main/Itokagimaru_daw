@@ -20,15 +20,15 @@ public class MainMenuHolder extends BaseGuiHolder {
 
     public void setup() {
         ItemStack writable = new ItemStack(Material.WRITABLE_BOOK);
-        MakeItem.setItemMetaByColor(writable, "打ち込みモード", NamedTextColor.YELLOW, null, ItemData.BUTTON_ID.key, "INPUT MODE");
+        MakeItem.setItemMetaByColor(writable, "打ち込みモード", NamedTextColor.YELLOW, null, ItemData.BUTTON_ID, "INPUT MODE");
         this.inv.setItem(3, writable);
 
         ItemStack disc = new ItemStack(Material.MUSIC_DISC_13);
-        MakeItem.setItemMetaByColor(disc, "再生モード", NamedTextColor.YELLOW, null, ItemData.BUTTON_ID.key, "PLAY MODE");
+        MakeItem.setItemMetaByColor(disc, "再生モード", NamedTextColor.YELLOW, null, ItemData.BUTTON_ID, "PLAY MODE");
         this.inv.setItem(5, disc);
 
         ItemStack bar = new ItemStack(Material.BARRIER);
-        MakeItem.setItemMetaByColor(bar, "しゅうりょう", NamedTextColor.DARK_RED, null, ItemData.BUTTON_ID.key, "CLOSE");
+        MakeItem.setItemMetaByColor(bar, "しゅうりょう", NamedTextColor.DARK_RED, null, ItemData.BUTTON_ID, "CLOSE");
         this.inv.setItem(8, bar);
     }
 

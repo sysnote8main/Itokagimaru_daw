@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
 
@@ -26,14 +25,14 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
             case "SET BPM" -> {
                 int bpm = ItemData.BPM.get(clicked);
                 ItemStack item = new ItemStack(Material.WOODEN_HOE);
-                MakeItem.setItemMeta(item, "記録済みのカセットテープ", null, "cassette_tape", ItemData.BPM.key, String.valueOf(bpm));
+                MakeItem.setItemMeta(item, "記録済みのカセットテープ", null, "cassette_tape", ItemData.BPM, bpm);
                 ItemData.BUTTON_ID.set(item, "RECORD ITEM");
                 ItemMeta meta = item.getItemMeta();
                 MusicManager musicManager = new MusicManager();
                 int[] musicList = musicManager.loadMusic(player);
                 ByteArrayManager byteArrayManager = new ByteArrayManager();
                 byte[] data = byteArrayManager.encode(musicList);
-                meta.getPersistentDataContainer().set(ItemData.BYTE_LIST.key, PersistentDataType.BYTE_ARRAY, data);
+                ItemData.BYTE_LIST.set(meta.getPersistentDataContainer(), data);
                 meta.lore(List.of(Component.text("BPM:" + bpm), Component.text("recorded by " + player.getName())));
                 item.setItemMeta(meta);
                 FakeEnchant.addFakeEnchant(item);

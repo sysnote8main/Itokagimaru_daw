@@ -8,7 +8,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class SheetMusicManager {
         ItemMeta meta = item.getItemMeta();
         PlaySound playSound = new PlaySound();
         playSound.playPageTurn(player);
-        meta.getPersistentDataContainer().set(ItemData.BYTE_LIST.key, PersistentDataType.BYTE_ARRAY, data);
+        ItemData.BYTE_LIST.set(meta.getPersistentDataContainer(), data);
         meta.lore(List.of(Component.text("written by " + player.getName())));
         return meta;
     }

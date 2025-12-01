@@ -25,7 +25,7 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
 
     public void setup() {
         ItemStack play = new ItemStack(Material.PAPER);
-        MakeItem.setItemMeta(play, "再生", null, "next_b_right", ItemData.BUTTON_ID.key, "PLAY");
+        MakeItem.setItemMeta(play, "再生", null, "next_b_right", ItemData.BUTTON_ID, "PLAY");
         inv.setItem(4, play);
         ItemStack bar = new ItemStack(Material.BARRIER);
         MakeItem.setItemMeta(bar, "未選択", null, null, null, null);
@@ -55,7 +55,7 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
             Inventory clicked_inv = event.getClickedInventory();
             double bpm = ItemData.BPM.get(Objects.requireNonNull(clicked_inv.getItem(7)));
             if (bpm == -1) return;
-            MakeItem.setItemMeta(clickedItem, "再生停止", null, "elytra", ItemData.BUTTON_ID.key, "STOP");
+            MakeItem.setItemMeta(clickedItem, "再生停止", null, "elytra", ItemData.BUTTON_ID, "STOP");
             PlayMusic play = new PlayMusic();
             Player player = (Player) event.getWhoClicked();
             PlayerMusicManager.setPlayingMusic(player, play);
@@ -65,7 +65,7 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
         } else if (Objects.equals(ItemData.BUTTON_ID.get(clickedItem), "STOP")) {
             Player player = (Player) event.getWhoClicked();
             PlayMusic play = PlayerMusicManager.getMusic(player);
-            MakeItem.setItemMeta(clickedItem, "再生", null, "next_b_right", ItemData.BUTTON_ID.key, "PLAY");
+            MakeItem.setItemMeta(clickedItem, "再生", null, "next_b_right", ItemData.BUTTON_ID, "PLAY");
             play.stop_task();
         }
     }
