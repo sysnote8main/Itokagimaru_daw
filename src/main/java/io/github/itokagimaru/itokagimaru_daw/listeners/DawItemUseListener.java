@@ -40,14 +40,13 @@ public class DawItemUseListener implements Listener {
                 item.setItemMeta(sheetMusicManage.makeSheetMusic(player));
             } else if (Objects.equals(data, NamespacedKey.minecraft("written_sheet_music"))) {
                 SheetMusicManager sheetMusicManage = new SheetMusicManager();
-                sheetMusicManage.lodeSheetMusic(player, item);
+                SheetMusicManager.loadSheetMusic(player, item);
             } else if (Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))) {
                 if (ItemData.BPM.get(item) != -1) return;
                 ItemsOptionBpmHolder itemsOptionBpmHolder = new ItemsOptionBpmHolder();
                 itemsOptionBpmHolder.updateBpmIcons(60);
                 player.openInventory(itemsOptionBpmHolder.getInventory());
             } else if (Objects.equals(data, NamespacedKey.minecraft("walkman"))) {
-                SwapItems swapItems = new SwapItems();
                 SwapItems.mainAndHead(player);
                 Location location = player.getLocation();
                 location.setPitch(0);

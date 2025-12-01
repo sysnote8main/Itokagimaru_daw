@@ -28,7 +28,7 @@ public class SheetMusicManager {
         return meta;
     }
 
-    public void lodeSheetMusic(Player player, ItemStack item) {
+    public static void loadSheetMusic(Player player, ItemStack item) {
         ByteArrayManager byteArrayManager = new ByteArrayManager();
         int[] music = byteArrayManager.decode(ItemData.BYTE_LIST.get(item));
         MusicManager musicManager = new MusicManager();
