@@ -1,5 +1,6 @@
 package io.github.itokagimaru.itokagimaru_daw.commands;
 
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -23,6 +24,7 @@ public class GetSheetMusicItem implements CommandExecutor {
             meta.setItemModel(NamespacedKey.minecraft("blank_sheet_music"));
             meta.customName(Component.text("白紙の楽譜"));
         });
+        ItemData.ITEM_ID.set(stack,"BLANK SHEET");
         player.give(stack);
 
         return true;

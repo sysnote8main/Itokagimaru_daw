@@ -3,13 +3,13 @@ package io.github.itokagimaru.itokagimaru_daw.manager;
 import java.nio.ByteBuffer;
 
 public class ByteArrayManager {
-    public byte[] encode(int[] list) {
+    public static byte[] encode(int[] list) {
         ByteBuffer buffer = ByteBuffer.allocate(list.length * 4);
         for (int i : list) buffer.putInt(i);
         return buffer.array();
     }
 
-    public int[] decode(byte[] data) {
+    public static int[] decode(byte[] data) {
         ByteBuffer buffer = ByteBuffer.wrap(data);
         int[] list = new int[data.length / 4];
         for (int i = 0; i < list.length; i++) {

@@ -1,8 +1,11 @@
 package io.github.itokagimaru.itokagimaru_daw.manager;
 
 import io.github.itokagimaru.itokagimaru_daw.Itokagimaru_daw;
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -20,7 +23,10 @@ public class MusicManager {
         if (music.length != Itokagimaru_daw.MUSICLENGTH) music = Arrays.copyOf(music, Itokagimaru_daw.MUSICLENGTH);
         Itokagimaru_daw.savedMusicList.put(player.getUniqueId(), music);
     }
-
+    public static void saveMusicForPdc(ItemStack pdcHolder, int[] music){
+        if (pdcHolder == null)return;
+        ItemData.MUSIC_SAVED_RED.set(pdcHolder, music);
+    }
     public int[] loadMusic(Player player) {
         if (!savedMusicList.containsKey(player.getUniqueId())) {
             int[] music = new int[Itokagimaru_daw.MUSICLENGTH];
@@ -30,7 +36,11 @@ public class MusicManager {
         }
         return savedMusicList.get(player.getUniqueId()).clone();
     }
-
+    public static int[] loadMusicForPdc(ItemStack pdcHolder){//後々複数セーブするのでクッションとして作っておきます
+        if (pdcHolder == null)return null;
+        int[] music = ItemData.MUSIC_SAVED_RED.get(pdcHolder);
+        return music;
+    }
     public Map<UUID, int[]> getSavedMusicList() {
         return savedMusicList;
     }

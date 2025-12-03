@@ -32,26 +32,42 @@ public class DawItemUseListener implements Listener {
         if (item.getItemMeta().hasItemModel()) {
             NamespacedKey data = item.getItemMeta().getItemModel();
             event.setCancelled(true);
-            if (Objects.equals(data, NamespacedKey.minecraft("itokagimaru_daw"))) {
-                MainMenuHolder mainMenuHolder = new MainMenuHolder();
-                player.openInventory(mainMenuHolder.getInventory());
-            } else if (Objects.equals(data, NamespacedKey.minecraft("blank_sheet_music"))) {
-                item.setItemMeta(SheetMusicManager.makeSheetMusic(player));
-            } else if (Objects.equals(data, NamespacedKey.minecraft("written_sheet_music"))) {
-                SheetMusicManager.loadSheetMusic(player, item);
-            } else if (Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))) {
-                if (ItemData.BPM.get(item) != -1) return;
-                ItemsOptionBpmHolder itemsOptionBpmHolder = new ItemsOptionBpmHolder();
-                itemsOptionBpmHolder.updateBpmIcons(60);
-                player.openInventory(itemsOptionBpmHolder.getInventory());
-            } else if (Objects.equals(data, NamespacedKey.minecraft("walkman"))) {
-                SwapItems.mainAndHead(player);
-                Location location = player.getLocation();
-                location.setPitch(0);
-                player.teleport(location);
-                ItemsPlayModeHolder itemsPlayModeHolder = new ItemsPlayModeHolder();
-                player.openInventory(itemsPlayModeHolder.getInventory());
+            String itemId = ItemData.ITEM_ID.get(item);
+            switch (itemId) {
+                case "daw" -> {
+                    MainMenuHolder mainMenuHolder = new MainMenuHolder();
+                    player.openInventory(mainMenuHolder.getInventory());
+                }
+                case "walkman" -> {
+                    SwapItems.mainAndHead(player);
+                    Location location = player.getLocation();
+                    location.setPitch(0);
+                    player.teleport(location);
+                    ItemsPlayModeHolder itemsPlayModeHolder = new ItemsPlayModeHolder();
+                    player.openInventory(itemsPlayModeHolder.getInventory());
+                }
             }
+//            if (Objects.equals(data, NamespacedKey.minecraft("itokagimaru_daw"))) {
+//                MainMenuHolder mainMenuHolder = new MainMenuHolder();
+//                player.openInventory(mainMenuHolder.getInventory());
+//            } else if (Objects.equals(data, NamespacedKey.minecraft("blank_sheet_music"))) {
+//                item.setItemMeta(SheetMusicManager.makeSheetMusic(player));
+//            } else if (Objects.equals(data, NamespacedKey.minecraft("written_sheet_music"))) {
+//                SheetMusicManager.loadSheetMusic(player, item);
+//            } else if (Objects.equals(data, NamespacedKey.minecraft("cassette_tape"))) {
+//                if (ItemData.BPM.get(item) != -1) return;
+//                ItemsOptionBpmHolder itemsOptionBpmHolder = new ItemsOptionBpmHolder();
+//                itemsOptionBpmHolder.updateBpmIcons(60);
+//                player.openInventory(itemsOptionBpmHolder.getInventory());
+//            } else if (Objects.equals(data, NamespacedKey.minecraft("walkman"))) {
+//                SwapItems.mainAndHead(player);
+//                Location location = player.getLocation();
+//                location.setPitch(0);
+//                player.teleport(location);
+//                ItemsPlayModeHolder itemsPlayModeHolder = new ItemsPlayModeHolder();
+//                player.openInventory(itemsPlayModeHolder.getInventory());
+//            }
+//        }
         }
     }
 }

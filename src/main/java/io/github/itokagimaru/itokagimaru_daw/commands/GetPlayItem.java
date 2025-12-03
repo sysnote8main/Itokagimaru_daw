@@ -1,5 +1,6 @@
 package io.github.itokagimaru.itokagimaru_daw.commands;
 
+import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -32,6 +33,7 @@ public class GetPlayItem implements CommandExecutor {
                     Component.text("音漏れいたしますのでご注意ください")
             ));
         });
+        ItemData.ITEM_ID.set(stack,"walkman");
         player.give(stack);
         return true;
     }

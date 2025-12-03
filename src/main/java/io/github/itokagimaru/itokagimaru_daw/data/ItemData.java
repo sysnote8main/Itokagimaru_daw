@@ -1,5 +1,6 @@
 package io.github.itokagimaru.itokagimaru_daw.data;
 
+import io.github.itokagimaru.itokagimaru_daw.Itokagimaru_daw;
 import org.bukkit.NamespacedKey;
 
 public class ItemData {
@@ -20,9 +21,10 @@ public class ItemData {
     public static final IntKey PAGE = new IntKey(getKey("page"), () -> 0);
     public static final ByteArrayKey BYTE_LIST = new ByteArrayKey(getKey("bytelist"), () -> new byte[]{});
     public static final StringKey BUTTON_ID = new StringKey(getKey("buttonid"), () -> "");
-
+    public static final StringKey ITEM_ID = new StringKey(getKey("itemid"), () -> "");
+    public static final ByteKey FLAG = new ByteKey(getKey("flag"), () -> (byte) 0);
     // 将来のために変数だけ用意
 //    public static final IntArrayKey MUSIC_SAVED_BLUE = new IntArrayKey(getKey("music_saved_blue"), () -> new int[0]);
-//    public static final IntArrayKey MUSIC_SAVED_RED = new IntArrayKey(getKey("music_saved_blue"), () -> new int[0]);
+    public static final IntArrayKey MUSIC_SAVED_RED = new IntArrayKey(getKey("music_saved_blue"), () -> new int[Itokagimaru_daw.MUSICLENGTH]);
 //    public static final IntArrayKey MUSIC_SAVED_YELLOW = new IntArrayKey(getKey("music_saved_blue"), () -> new int[0]);
 }

@@ -3,6 +3,8 @@ package io.github.itokagimaru.itokagimaru_daw.gui.menu;
 import io.github.itokagimaru.itokagimaru_daw.data.ItemData;
 import io.github.itokagimaru.itokagimaru_daw.manager.ByteArrayManager;
 import io.github.itokagimaru.itokagimaru_daw.manager.MusicManager;
+import io.github.itokagimaru.itokagimaru_daw.manager.PlayerMusicManager;
+import io.github.itokagimaru.itokagimaru_daw.task.PlayMusic;
 import io.github.itokagimaru.itokagimaru_daw.util.FakeEnchant;
 import io.github.itokagimaru.itokagimaru_daw.util.MakeItem;
 import net.kyori.adventure.text.Component;
@@ -18,7 +20,6 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
     @Override
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        player.sendMessage("testes");
         ItemStack clicked = event.getCurrentItem();
         String buttonId = ItemData.BUTTON_ID.get(clicked);
         switch (buttonId) {
@@ -36,7 +37,8 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
                 meta.lore(List.of(Component.text("BPM:" + bpm), Component.text("recorded by " + player.getName())));
                 item.setItemMeta(meta);
                 FakeEnchant.addFakeEnchant(item);
-                player.getInventory().setItemInMainHand(item);
+                player.give(item);
+
                 player.closeInventory();
             }
             case "SHIFT RIGHT" -> {
@@ -54,5 +56,9 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
                 updateBpmIcons(bpm);
             }
         }
+    }
+    @Override
+    public void onClose(Player player) {
+
     }
 }

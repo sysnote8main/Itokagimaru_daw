@@ -19,6 +19,10 @@ public class MainMenuHolder extends BaseGuiHolder {
     }
 
     public void setup() {
+        ItemStack sheetMusic = new ItemStack(Material.WOODEN_HOE);
+        MakeItem.setItemMetaByColor(sheetMusic,"save&lode",NamedTextColor.YELLOW,"written_sheet_music",ItemData.BUTTON_ID,"SAVE AND LODE");
+        this.inv.setItem(1, sheetMusic);
+
         ItemStack writable = new ItemStack(Material.WRITABLE_BOOK);
         MakeItem.setItemMetaByColor(writable, "打ち込みモード", NamedTextColor.YELLOW, null, ItemData.BUTTON_ID, "INPUT MODE");
         this.inv.setItem(3, writable);
@@ -45,6 +49,9 @@ public class MainMenuHolder extends BaseGuiHolder {
             clickedPlayer.openInventory(dawsPlayModeHolder.getInventory());
         } else if (Objects.equals(ItemData.BUTTON_ID.get(clickedItem), "CLOSE")) {
             clickedPlayer.closeInventory();
+        } else if (Objects.equals(ItemData.BUTTON_ID.get(clickedItem), "SAVE AND LODE")) {
+            MusicMenuHolder musicMenuHolder = new MusicMenuHolder();
+            clickedPlayer.openInventory(musicMenuHolder.getInventory());
         }
     }
 
