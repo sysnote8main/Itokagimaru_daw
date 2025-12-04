@@ -61,12 +61,12 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
             PlayerMusicManager.setPlayingMusic(player, play);
             ByteArrayManager byteArrayManager = new ByteArrayManager();
             int[] music = byteArrayManager.decode(ItemData.BYTE_LIST.get(clicked_inv.getItem(7)));
-            play.play_music(player, music, (long) (1200 / bpm));
+            play.playMusic(player, music, (long) (1200 / bpm));
         } else if (Objects.equals(ItemData.BUTTON_ID.get(clickedItem), "STOP")) {
             Player player = (Player) event.getWhoClicked();
             PlayMusic play = PlayerMusicManager.getMusic(player);
             MakeItem.setItemMeta(clickedItem, "再生", null, "next_b_right", ItemData.BUTTON_ID, "PLAY");
-            play.stop_task();
+            play.stopTask();
         }
     }
 
@@ -74,6 +74,6 @@ public class ItemsPlayModeHolder extends BaseGuiHolder {
     public void onClose(Player player) {
         PlayMusic play = PlayerMusicManager.getMusic(player);
         if (play == null) return;
-        play.stop_task();
+        play.stopTask();
     }
 }

@@ -47,12 +47,11 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
             MakeItem.setItemMeta(clicked, "再生停止", null, "elytra", ItemData.BUTTON_ID, "STOP");
             PlayMusic play = new PlayMusic();
             PlayerMusicManager.setPlayingMusic(player, play);
-            MusicManager music = new MusicManager();
-            play.play_music(player, music.loadMusic(player), (long) (1200 / bpm));
+            play.playMusic(player, MusicManager.loadMusicForPdc(player.getInventory().getItemInMainHand()), (long) (1200 / bpm));
         } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "STOP")) {
             PlayMusic play = PlayerMusicManager.getMusic(player);
             MakeItem.setItemMeta(clicked, "再生", null, "next_b_right", ItemData.BUTTON_ID, "PLAY");
-            play.stop_task();
+            play.stopTask();
         }
     }
 
@@ -60,6 +59,6 @@ public class DawsPlayModeHolder extends BaseGuiHolder {
     public void onClose(Player player) {
         PlayMusic play = PlayerMusicManager.getMusic(player);
         if (play == null) return;
-        play.stop_task();
+        play.stopTask();
     }
 }

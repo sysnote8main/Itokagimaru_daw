@@ -15,7 +15,6 @@ public class SheetMusicManager {
     public static ItemStack makeSheetMusic(Player player) {
         MusicManager musicManager = new MusicManager();
         int[] musicList = musicManager.loadMusicForPdc(player.getInventory().getItemInMainHand());
-        MakeItem makeItem = new MakeItem();
         ItemStack item = new ItemStack(Material.WOODEN_HOE);
         MakeItem.setItemMeta(item,"記述済みの楽譜", null, "written_sheet_music",ItemData.ITEM_ID,"WRITTEN MUSIC");
         ItemData.MUSIC_SAVED_RED.set(item,musicList);
@@ -28,7 +27,6 @@ public class SheetMusicManager {
     }
 
     public static void loadSheetMusic(Player player, ItemStack item) {
-        MusicManager musicManager = new MusicManager();
         int[] music = ItemData.MUSIC_SAVED_RED.get(item);
         ItemStack saveItem = player.getInventory().getItemInMainHand();
         MusicManager.saveMusicForPdc(saveItem,music);

@@ -21,6 +21,7 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
         ItemStack left = new ItemStack(Material.PAPER);
         ItemStack right = new ItemStack(Material.PAPER);
         MakeItem.setItemMeta(left, "", null, "next_b_left", ItemData.BUTTON_ID, "SHIFT LEFT");
+        ItemData.FLAG.set(left,(byte) 1); //close時にアイテムを返還するかのフラグだよ。絶対もっといい方法があった...
         MakeItem.setItemMeta(right, "", null, "next_b_right", ItemData.BUTTON_ID, "SHIFT RIGHT");
         inv.setItem(0, left);
         inv.setItem(8, right);
@@ -80,5 +81,7 @@ public class DawsOptionBpmHolder extends BaseGuiHolder {
 
     @Override
     public void onClose(Player player) {
+        DawsPlayModeHolder dawsPlayModeHolder = new DawsPlayModeHolder(60);
+        player.openInventory(dawsPlayModeHolder.getInventory());
     }
 }

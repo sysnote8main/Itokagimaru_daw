@@ -397,7 +397,7 @@ public class InputModeHolder extends BaseGuiHolder {
             int[] reset = new int[256];
             Arrays.fill(reset, 0);
             MusicManager musicManager = new MusicManager();
-            musicManager.saveMusic(player, reset);
+            musicManager.saveMusicForPdc(player.getInventory().getItem(9),reset);
 
             ItemStack page_item = clickedInv.getItem(2);
             Integer page = ItemData.PAGE.get(page_item);

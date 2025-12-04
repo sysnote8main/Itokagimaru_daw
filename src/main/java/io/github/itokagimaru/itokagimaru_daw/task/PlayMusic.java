@@ -16,7 +16,7 @@ public class PlayMusic {
     //HashMap<UUID, BukkitTask> tasks = new HashMap<>();
     BukkitTask task;
 
-    public void play_music(Player player, int[] lodedMusic, long interval) {
+    public void playMusic(Player player, int[] lodedMusic, long interval) {
         task = new BukkitRunnable() {
             int count = 0;
 
@@ -29,17 +29,14 @@ public class PlayMusic {
                     cancel();
                 } else if (lodedMusic[count] != 0) {
                     PlaySound.playNote(player, lodedMusic[count]);
-
-                    ParticleManager particlemanager = new ParticleManager();
-                    particlemanager.playNote(player);
+                    ParticleManager.playNote(player);
                 }
                 count++;
             }
         }.runTaskTimer(Itokagimaru_daw.getInstance(), 0, interval);
     }
 
-    public void stop_task() {
+    public void stopTask() {
         task.cancel();
-
     }
 }

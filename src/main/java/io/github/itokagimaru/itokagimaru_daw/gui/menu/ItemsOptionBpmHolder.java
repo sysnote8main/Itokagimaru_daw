@@ -30,7 +30,7 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
                 ItemData.BUTTON_ID.set(item, "RECORD ITEM");
                 ItemMeta meta = item.getItemMeta();
                 MusicManager musicManager = new MusicManager();
-                int[] musicList = musicManager.loadMusic(player);
+                int[] musicList = musicManager.loadMusicForPdc(player.getInventory().getItemInMainHand());
                 ByteArrayManager byteArrayManager = new ByteArrayManager();
                 byte[] data = byteArrayManager.encode(musicList);
                 ItemData.BYTE_LIST.set(meta.getPersistentDataContainer(), data);
@@ -59,6 +59,9 @@ public class ItemsOptionBpmHolder extends DawsOptionBpmHolder {
     }
     @Override
     public void onClose(Player player) {
-
+        if (ItemData.FLAG.get(inv.getItem(0)) != (byte) 0) return;
+        ItemStack cassetteTape = new ItemStack(Material.WOODEN_HOE);
+        MakeItem.setItemMeta(cassetteTape,"カセットテープ",null,"cassette_tape", ItemData.ITEM_ID,"CASSETTE TAPE");
+        player.getInventory().addItem(cassetteTape);
     }
 }

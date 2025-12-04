@@ -70,15 +70,19 @@ public class MusicSheetExportHolder extends BaseGuiHolder{
             setup();
         } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "DECISION")) {
             ItemStack check = inv.getItem(4);
+
             if (Objects.equals(ItemData.ITEM_ID.get(check), "SELECT CASSETTE")) {
                 ItemsOptionBpmHolder itemsOptionBpmHolder = new ItemsOptionBpmHolder();
+                itemsOptionBpmHolder.updateBpmIcons(60);
+                check.setAmount(0);
                 player.openInventory(itemsOptionBpmHolder.getInventory());
             } else if (Objects.equals(ItemData.ITEM_ID.get(check), "SELECT SHEET")) {
                 SheetMusicManager sheetMusicManager = new SheetMusicManager();
                 player.getInventory().addItem(sheetMusicManager.makeSheetMusic(player));
+                check.setAmount(0);
                 player.closeInventory();
             }
-            check.setAmount(0);
+
 
         } else if (Objects.equals(ItemData.BUTTON_ID.get(clicked), "CANCEL")) {
             player.closeInventory();
@@ -87,6 +91,7 @@ public class MusicSheetExportHolder extends BaseGuiHolder{
     @Override
     public void onClose(Player player){
         ItemStack check = inv.getItem(4);
+        if (check == null) return;
         if (Objects.equals(ItemData.ITEM_ID.get(check), "SELECT CASSETTE")) {
             ItemStack cassetteTape = new ItemStack(Material.WOODEN_HOE);
             MakeItem.setItemMeta(cassetteTape,"カセットテープ",null,"cassette_tape", ItemData.ITEM_ID,"CASSETTE TAPE");
